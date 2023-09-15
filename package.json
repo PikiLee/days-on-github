@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "scripts": {
+    "prepare": "nitropack prepare",
+    "dev": "nitropack dev",
+    "build": "nitropack build",
+    "preview": "node .output/server/index.mjs"
+  },
+  "dependencies": {
+    "axios": "^1.5.0",
+    "js-base64": "^3.7.5",
+    "nitropack": "latest",
+    "zod": "^3.22.2"
+  }
+}
