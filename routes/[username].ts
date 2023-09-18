@@ -1,40 +1,55 @@
 import { z } from "zod";
 import axios from "axios";
-import { encode } from "js-base64";
+import sharp from "sharp";
+import { createClient } from "@supabase/supabase-js";
 
-export default eventHandler(async () => {
+export default eventHandler(async (event) => {
   const GITHUB_CLIENT_TOKEN = process.env.GITHUB_CLIENT_TOKEN;
   if (!GITHUB_CLIENT_TOKEN)
     createError({
       status: 500,
       message: "Missing GITHUB_CLIENT_TOKEN environment variable",
     });
-  const USERNAME = process.env.USERNAME;
-  if (!USERNAME)
+  const SUPABASE_PROJECT_URL = process.env.SUPABASE_PROJECT_URL;
+  if (!SUPABASE_PROJECT_URL)
     createError({
       status: 500,
-      message: "Missing USERNAME environment variable",
+      message: "Missing SUPABASE_PROJECT_URL environment variable",
+    });
+  const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
+  if (!SUPABASE_API_KEY)
+    createError({
+      status: 500,
+      message: "Missing SUPABASE_API_KEY environment variable",
+    });
+  const SUPABASE_BUCKET_NAME = process.env.SUPABASE_BUCKET_NAME;
+  if (!SUPABASE_BUCKET_NAME)
+    createError({
+      status: 500,
+      message: "Missing SUPABASE_BUCKET_NAME environment variable",
     });
 
-    const client = axios.create({
-      baseURL: 'https://api.github.com/graphql',
-      headers: {
-        Authorization: `bearer ${GITHUB_CLIENT_TOKEN}`,
-      },
-    })
+  const username = getRouterParams(event).username;
+
+  const client = axios.create({
+    baseURL: "https://api.github.com/graphql",
+    headers: {
+      Authorization: `bearer ${GITHUB_CLIENT_TOKEN}`,
+    },
+  });
 
   const branchSchema = z
     .object({
-        id: z.string(),
-        target: z.object({
-          oid: z.string(),
-          file: z.object({
-            object: z.object({
-              text: z.string(),
-            }),
+      id: z.string(),
+      target: z.object({
+        oid: z.string(),
+        file: z.object({
+          object: z.object({
+            text: z.string(),
           }),
         }),
-      })
+      }),
+    })
     .nullable();
 
   const readmeSchema = z.object({
@@ -61,10 +76,8 @@ export default eventHandler(async () => {
   });
 
   try {
-    const res = await client.post(
-      ``,
-      {
-        query: `
+    const res = await client.post(``, {
+      query: `
             query($username: String!) {
               user: user(login: $username) {
                 contributionsCollection {
@@ -112,11 +125,10 @@ export default eventHandler(async () => {
               }
             }
             `,
-        variables: {
-          username: USERNAME,
-        },
+      variables: {
+        username: username,
       },
-    );
+    });
     // return res.data.data;
     const data = readmeSchema.parse(res.data.data);
 
@@ -130,79 +142,41 @@ export default eventHandler(async () => {
       }
       return acc;
     }, 0);
-    const percentageDaysOnGithub = `${Math.round(daysOnGithub / 365 * 100)}%`
-
-    const branchName = data.repository.main ? "main" : "master";
-    const branch = data.repository.main ?? data.repository.master;
-    const readme = branch.target.file.object.text;
-    const branchId = branch.id
-    const commitId = branch.target.oid;
+    const percentageDaysOnGithub = `${Math.round((daysOnGithub / 365) * 100)}%`;
 
     const message = `Days on Github in recent 365 days: ${daysOnGithub} / 365, ${percentageDaysOnGithub}`;
-    const commitMessage = `Update README.md by days--Github on ${new Date().toDateString()}`;
-    const modifiedReadme = readme.replace(
-      /<!-- days-on-github -->(.|\n)*<!-- days-on-github -->/,
-      `<!-- days-on-github -->${message}<!-- days-on-github -->`
-    );
-
-
-    const commitSchema = z.object({
-      createCommitOnBranch: z.object({
-      commit: z.object({
-        commitUrl: z.string(),
-      }),
+    const output = `${username}.png`;
+    const buffer = await sharp({
+      text: {
+        text: `<span foreground="black">${message}</span>`,
+        rgba: true,
+        dpi: 72,
+      },
     })
-    });
-    const res2 = await client.post(
-      ``,
-      {
-        query: `
-        mutation($expectedHeadOid: GitObjectID!, $contents: Base64String!, $branchId: ID!, $commitMessage: String!) {
-          createCommitOnBranch(
-            input: {
-              branch: {id: $branchId},
-              message: {headline: $commitMessage},
-              fileChanges: {
-                additions: [
-                  {
-                    path: "README.md",
-                    contents: $contents
-                  }
-                ]
-              },
-              expectedHeadOid: $expectedHeadOid
-            }
-          ) {
-            commit {
-              commitUrl
-            }
-          }
-        }
-        `,
-        variables: {
-          expectedHeadOid: commitId,
-          contents: encode(modifiedReadme),
-          branchId,
-          commitMessage,
-        }
+      .png()
+      .toBuffer();
+    const file = new File([buffer], output, { type: "image/png" });
+
+    const supabase = createClient(SUPABASE_PROJECT_URL, SUPABASE_API_KEY, {
+      auth: {
+        persistSession: false,
       }
-    );
-
-    console.dir(res2.data, {
-      depth: null
     });
-    const data2 = commitSchema.parse(res2.data.data);
-    const commitUrl = data2.createCommitOnBranch.commit.commitUrl;
 
+    const { error } = await supabase.storage
+      .from(SUPABASE_BUCKET_NAME)
+      .upload(output, file, {
+        upsert: true,
+      });
+    if (error) {
+      createError(error)
+    }
     return {
       percentageDaysOnGithub,
       daysOnGithub,
-      readme,
-      branchId,
-      modifiedReadme,
-      branchName,
-      commitId,
-      commitUrl
+      message,
+      output,
+      url: `${SUPABASE_PROJECT_URL}/storage/v1/object/public/${SUPABASE_BUCKET_NAME}/${output}`,
     };
   } catch (error) {
     console.dir(error);
