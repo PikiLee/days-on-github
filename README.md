@@ -1,18 +1,20 @@
-# Nitro Minimal Starter
+# Days on github
 
-Look at the [Nitro documentation](https://nitro.unjs.io/) to learn more.
+Show how many days you have spend on Github in the last 365 days in your Github profile.
+
+# Usage
+
+Add `[](https://days-on-github.vercel.app/username)` to your profile repository's `README.md`
+
+# Environment Variables
+
+1. `GITHUB_CLIENT_TOKEN`: [github token](https://github.com/settings/tokens?type=beta)
 
 ## Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# npm
-npm install
-
-# yarn
-yarn install
-
 # pnpm
 pnpm install
 ```
@@ -22,7 +24,7 @@ pnpm install
 Start the development server on <http://localhost:3000>
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ## Production
@@ -30,13 +32,11 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Locally preview production build:
 
 ```bash
-npm run preview
+pnpm run preview
 ```
-
-Check out the [deployment documentation](https://nitro.unjs.io/deploy) for more information.
