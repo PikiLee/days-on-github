@@ -3,7 +3,7 @@ import axios from "axios";
 import sharp from "sharp";
 import { createClient } from "@supabase/supabase-js";
 
-export default cachedEventHandler(async (event) => {
+export const getImageUrl = cachedFunction(async (username: string) => {
   const GITHUB_CLIENT_TOKEN = process.env.GITHUB_CLIENT_TOKEN;
   if (!GITHUB_CLIENT_TOKEN)
     createError({
@@ -29,7 +29,6 @@ export default cachedEventHandler(async (event) => {
       message: "Missing SUPABASE_BUCKET_NAME environment variable",
     });
 
-  const username = getRouterParams(event).username;
 
   const client = axios.create({
     baseURL: "https://api.github.com/graphql",
@@ -171,13 +170,8 @@ export default cachedEventHandler(async (event) => {
     if (error) {
       createError(error)
     }
-    return {
-      percentageDaysOnGithub,
-      daysOnGithub,
-      message,
-      output,
-      url: `${SUPABASE_PROJECT_URL}/storage/v1/object/public/${SUPABASE_BUCKET_NAME}/${output}`,
-    };
+
+    return `${SUPABASE_PROJECT_URL}/storage/v1/object/public/${SUPABASE_BUCKET_NAME}/${output}`;
   } catch (error) {
     console.dir(error);
     createError({
@@ -188,3 +182,9 @@ export default cachedEventHandler(async (event) => {
 }, {
   maxAge: 60 * 60 * 24, // 1 day
 });
+
+export default eventHandler(async (event) => {
+  const username = getRouterParams(event).username;
+  const url = await getImageUrl(username);
+  sendRedirect(event, url);
+},);
