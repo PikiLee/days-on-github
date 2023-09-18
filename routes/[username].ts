@@ -3,7 +3,7 @@ import axios from "axios";
 import sharp from "sharp";
 import { createClient } from "@supabase/supabase-js";
 
-export default eventHandler(async (event) => {
+export default cachedEventHandler(async (event) => {
   const GITHUB_CLIENT_TOKEN = process.env.GITHUB_CLIENT_TOKEN;
   if (!GITHUB_CLIENT_TOKEN)
     createError({
@@ -185,4 +185,6 @@ export default eventHandler(async (event) => {
       message: error,
     });
   }
+}, {
+  maxAge: 60 * 60 * 24, // 1 day
 });
