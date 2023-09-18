@@ -2,6 +2,8 @@
 
 Show how many days you have spend on Github in the last 365 days in your Github profile.
 
+![example](https://github.com/PikiLee/days-on-github/assets/37203836/81f370f6-aea2-437c-93f5-eaf685cc0d8b)
+
 # Usage
 
 Add `[](https://days-on-github.vercel.app/username)` to your profile repository's `README.md`
