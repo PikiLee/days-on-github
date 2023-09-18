@@ -136,26 +136,7 @@ export const getGiuhubData = cachedFunction(async (username: string) => {
 });
 
 export default eventHandler(async (event) => {
-  const SUPABASE_PROJECT_URL = process.env.SUPABASE_PROJECT_URL;
-  if (!SUPABASE_PROJECT_URL)
-    createError({
-      status: 500,
-      message: "Missing SUPABASE_PROJECT_URL environment variable",
-    });
-  const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
-  if (!SUPABASE_API_KEY)
-    createError({
-      status: 500,
-      message: "Missing SUPABASE_API_KEY environment variable",
-    });
-  const SUPABASE_BUCKET_NAME = process.env.SUPABASE_BUCKET_NAME;
-  if (!SUPABASE_BUCKET_NAME)
-    createError({
-      status: 500,
-      message: "Missing SUPABASE_BUCKET_NAME environment variable",
-    });
-
-    const username = getRouterParams(event).username;
+  const username = getRouterParams(event).username;
   const message = await getGiuhubData(username);
   const buffer = await sharp({
     text: {
@@ -168,5 +149,5 @@ export default eventHandler(async (event) => {
     .toBuffer();
 
   setResponseHeader(event, "Content-Type", "image/png");
-  return buffer
+  return buffer;
 });
