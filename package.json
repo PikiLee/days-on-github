@@ -4,11 +4,16 @@
     "prepare": "nitropack prepare",
     "dev": "nitropack dev",
     "build": "nitropack build",
-    "preview": "node .output/server/index.mjs"
+    "preview": "node .output/server/index.mjs",
+    "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "axios": "^1.5.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "nitropack": "latest",
+    "prettier": "^3.0.3",
     "sharp": "^0.32.5",
     "zod": "^3.22.2"
   }
