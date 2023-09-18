@@ -157,7 +157,6 @@ export default eventHandler(async (event) => {
 
     const username = getRouterParams(event).username;
   const message = await getGiuhubData(username);
-  const output = `${username}.png`;
   const buffer = await sharp({
     text: {
       text: `<span foreground="black">${message}</span>`,

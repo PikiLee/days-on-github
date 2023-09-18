@@ -7,7 +7,6 @@
     "preview": "node .output/server/index.mjs"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.33.2",
     "axios": "^1.5.0",
     "nitropack": "latest",
     "sharp": "^0.32.5",
