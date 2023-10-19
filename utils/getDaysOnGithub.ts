@@ -5,7 +5,7 @@ export const getDaysOnGithub = cachedFunction(
   async (username: string) => {
     const GITHUB_CLIENT_TOKEN = process.env.GITHUB_CLIENT_TOKEN;
     if (!GITHUB_CLIENT_TOKEN)
-      createError({
+      throw createError({
         status: 500,
         message: "Missing GITHUB_CLIENT_TOKEN environment variable",
       });
@@ -129,7 +129,7 @@ export const getDaysOnGithub = cachedFunction(
         percentageDaysOnGithub,
       };
     } catch (error) {
-      createError({
+      throw createError({
         status: 500,
         message: error,
       });

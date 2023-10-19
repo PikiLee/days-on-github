@@ -11,5 +11,6 @@ export default eventHandler(async (event) => {
   const buffer = await generateImageBufferFromText(message);
 
   setResponseHeader(event, "Content-Type", "image/png");
+
   return buffer;
 });
