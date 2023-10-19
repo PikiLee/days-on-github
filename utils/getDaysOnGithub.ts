@@ -3,17 +3,17 @@ import axios from "axios";
 
 export const getDaysOnGithub = cachedFunction(
   async (username: string) => {
-    const GITHUB_CLIENT_TOKEN = process.env.GITHUB_CLIENT_TOKEN;
-    if (!GITHUB_CLIENT_TOKEN)
+    const CLIENT_TOKEN = process.env.CLIENT_TOKEN;
+    if (!CLIENT_TOKEN)
       throw createError({
         status: 500,
-        message: "Missing GITHUB_CLIENT_TOKEN environment variable",
+        message: "Missing CLIENT_TOKEN environment variable",
       });
 
     const client = axios.create({
       baseURL: "https://api.github.com/graphql",
       headers: {
-        Authorization: `bearer ${GITHUB_CLIENT_TOKEN}`,
+        Authorization: `bearer ${CLIENT_TOKEN}`,
       },
     });
 

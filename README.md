@@ -10,7 +10,7 @@ Add `[](https://days-on-github.vercel.app/username)` to your profile repository'
 
 # Environment Variables
 
-1. `GITHUB_CLIENT_TOKEN`: [github token](https://github.com/settings/tokens?type=beta)
+1. `CLIENT_TOKEN`: [github token](https://github.com/settings/tokens?type=beta)
 
 ## Setup
 
