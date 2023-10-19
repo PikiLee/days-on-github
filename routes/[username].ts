@@ -9,6 +9,7 @@ export default eventHandler(async (event) => {
   const message = `${daysOnGithub} (${percentageDaysOnGithub}) days on Github in last 365 days.`;
 
   const buffer = await generateImageBufferFromText(message);
+  console.log("Hello from nitro!");
 
   setResponseHeader(event, "Content-Type", "image/png");
 
