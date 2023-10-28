@@ -6,7 +6,7 @@ export default eventHandler(async (event) => {
 
   const { daysOnGithub, percentageDaysOnGithub } =
     await getDaysOnGithub(username);
-  const message = `${daysOnGithub} (${percentageDaysOnGithub}) days on Github in last 365 days.`;
+  const message = `Spent ${daysOnGithub} (${percentageDaysOnGithub}) days on Github in last 365 days.`;
 
   const buffer = await generateImageBufferFromText(message);
 
