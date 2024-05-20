@@ -19,9 +19,13 @@ jobs:
         with:
           github-token: ${{secrets.ACTION_GITHUB_TOKEN}}
           script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'The preview URL is: ${{ steps.vercel_preview_url.outputs.vercel_preview_url }}/PikiLee.'
-            });
+            const previewURL = "${{ steps.vercel_preview_url.outputs.vercel_preview_url }}".match(/https:\/\/vercel\.live\/open-feedback\/(.+.vercel.app).*/)[1];
+            if (previewURL) {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `The preview URL is: ${previewURL}/PikiLee.`
+              });
+            }
+
