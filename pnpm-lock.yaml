@@ -28,7 +28,7 @@ dependencies:
     version: 0.32.5
   zod:
     specifier: ^3.22.2
-    version: 3.22.2
+    version: 3.23.8
 
 devDependencies:
   pnpm:
@@ -4755,6 +4755,6 @@ packages:
       readable-stream: 3.6.2
     dev: false
 
-  /zod@3.22.2:
-    resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
+  /zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
     dev: false
