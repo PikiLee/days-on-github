@@ -1,12 +1,21 @@
 {
   "root": true,
   "extends": [
-    "@nuxtjs/eslint-config-typescript",
+    "@nuxtjs/eslint-config-typescript"
   ],
   "plugins": [
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "semi": false,
+        "trailingComma": "none",
+        "bracketSpacing": true,
+        "tabWidth": 2
+      }
+    ]
   }
 }
