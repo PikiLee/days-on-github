@@ -1,21 +1,22 @@
-import { z } from "zod";
-import axios from "axios";
+import { z } from 'zod'
+import axios from 'axios'
 
 export const getDaysOnGithub = cachedFunction(
   async (username: string) => {
-    const GITHUB_CLIENT_TOKEN = process.env.GITHUB_CLIENT_TOKEN;
-    if (!GITHUB_CLIENT_TOKEN)
+    const GITHUB_CLIENT_TOKEN = process.env.GITHUB_CLIENT_TOKEN
+    if (!GITHUB_CLIENT_TOKEN) {
       throw createError({
         status: 500,
-        message: "Missing GITHUB_CLIENT_TOKEN environment variable",
-      });
+        message: 'Missing GITHUB_CLIENT_TOKEN environment variable'
+      })
+    }
 
     const client = axios.create({
-      baseURL: "https://api.github.com/graphql",
+      baseURL: 'https://api.github.com/graphql',
       headers: {
-        Authorization: `bearer ${GITHUB_CLIENT_TOKEN}`,
-      },
-    });
+        Authorization: `bearer ${GITHUB_CLIENT_TOKEN}`
+      }
+    })
 
     const branchSchema = z
       .object({
@@ -24,12 +25,12 @@ export const getDaysOnGithub = cachedFunction(
           oid: z.string(),
           file: z.object({
             object: z.object({
-              text: z.string(),
-            }),
-          }),
-        }),
+              text: z.string()
+            })
+          })
+        })
       })
-      .nullable();
+      .nullable()
 
     const dataSchema = z.object({
       user: z.object({
@@ -40,22 +41,22 @@ export const getDaysOnGithub = cachedFunction(
                 contributionDays: z.array(
                   z.object({
                     contributionCount: z.number(),
-                    date: z.string(),
-                  }),
-                ),
-              }),
-            ),
-          }),
-        }),
+                    date: z.string()
+                  })
+                )
+              })
+            )
+          })
+        })
       }),
       repository: z.object({
         master: branchSchema,
-        main: branchSchema,
-      }),
-    });
+        main: branchSchema
+      })
+    })
 
     try {
-      const res = await client.post(``, {
+      const res = await client.post('', {
         query: `
               query($username: String!) {
                 user: user(login: $username) {
@@ -105,37 +106,39 @@ export const getDaysOnGithub = cachedFunction(
               }
               `,
         variables: {
-          username,
-        },
-      });
-      const data = dataSchema.parse(res.data.data);
+          username
+        }
+      })
+      const data = dataSchema.parse(res.data.data)
 
       const contributionDays =
         data.user.contributionsCollection.contributionCalendar.weeks.flatMap(
-          (week) => week.contributionDays,
-        );
+          (week) => {
+            return week.contributionDays
+          }
+        )
       const daysOnGithub = contributionDays.reduce((acc, day) => {
         if (day.contributionCount > 0) {
-          acc += 1;
+          acc += 1
         }
-        return acc;
-      }, 0);
+        return acc
+      }, 0)
       const percentageDaysOnGithub = `${Math.round(
-        (daysOnGithub / 365) * 100,
-      )}%`;
+        (daysOnGithub / 365) * 100
+      )}%`
 
       return {
         daysOnGithub,
-        percentageDaysOnGithub,
-      };
+        percentageDaysOnGithub
+      }
     } catch (error) {
       throw createError({
         status: 500,
-        message: error,
-      });
+        message: error
+      })
     }
   },
   {
-    maxAge: 60 * 60 * 24, // 1 day
-  },
-);
+    maxAge: 60 * 60 * 24 // 1 day
+  }
+)
