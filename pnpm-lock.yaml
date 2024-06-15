@@ -33,6 +33,9 @@ importers:
         specifier: ^3.22.2
         version: 3.23.8
     devDependencies:
+      eslint:
+        specifier: 8.57.0
+        version: 8.57.0
       pnpm:
         specifier: ^9.0.0
         version: 9.3.0

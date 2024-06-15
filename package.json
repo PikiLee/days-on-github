@@ -19,6 +19,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "eslint": "8.57.0",
     "pnpm": "^9.0.0"
   }
 }
