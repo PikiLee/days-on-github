@@ -123,9 +123,7 @@ export const getDaysOnGithub = cachedFunction(
         }
         return acc
       }, 0)
-      const percentageDaysOnGithub = `${Math.round(
-        (daysOnGithub / 365) * 100
-      )}%`
+      const percentageDaysOnGithub = Math.round((daysOnGithub / 365) * 100)
 
       return {
         daysOnGithub,
