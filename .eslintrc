@@ -1,21 +1,15 @@
 {
   "root": true,
-  "extends": [
-    "@nuxtjs/eslint-config-typescript"
-  ],
-  "plugins": [
-    "prettier"
-  ],
+  "extends": ["@nuxtjs/eslint-config-typescript"],
+  "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": [
       "error",
+      {},
       {
-        "singleQuote": true,
-        "semi": false,
-        "trailingComma": "none",
-        "bracketSpacing": true,
-        "tabWidth": 2
+        "usePrettierrc": true
       }
-    ]
+    ],
+    "space-before-function-paren": "off"
   }
 }
