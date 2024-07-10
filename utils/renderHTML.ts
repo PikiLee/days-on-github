@@ -4,6 +4,10 @@ import { render } from '../dist/server/render.mjs'
 export interface GithubData {
   daysOnGithub: number
   percentageDaysOnGithub: number
+  contributionDays: {
+    date?: string
+    contributionCount?: number
+  }[]
 }
 
 export default async function renderHTML({

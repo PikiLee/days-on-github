@@ -1,14 +1,12 @@
 import nodeHtmlToImage from 'node-html-to-image'
-import { getDaysOnGithub } from '../utils/getDaysOnGithub'
+import { getDaysOnGithub } from '@/utils/getDaysOnGithub/getDaysOnGithub'
 import renderHTML from '~/utils/renderHTML'
 
 export default eventHandler(async (event) => {
   const username = getRouterParams(event).username
 
-  const { daysOnGithub, percentageDaysOnGithub } =
-    await getDaysOnGithub(username)
-
-  const html = await renderHTML({ daysOnGithub, percentageDaysOnGithub })
+  const githubData = await getDaysOnGithub(username)
+  const html = await renderHTML(githubData)
 
   const image = await nodeHtmlToImage({
     html
