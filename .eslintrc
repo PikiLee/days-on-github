@@ -10,6 +10,7 @@
         "usePrettierrc": true
       }
     ],
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "arrow-parens": "off"
   }
 }
