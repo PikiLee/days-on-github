@@ -4,9 +4,9 @@ import type { GithubData } from '../renderHTML/renderHTML'
 export const getDaysOnGithub = async (
   username: string
 ): Promise<GithubData> => {
-  const GITHUB_CLIENT_TOKEN = process.env.GITHUB_CLIENT_TOKEN
-  if (!GITHUB_CLIENT_TOKEN) {
-    throw new Error('Missing GITHUB_CLIENT_TOKEN environment variable')
+  const NITRO_GITHUB_CLIENT_TOKEN = process.env.NITRO_GITHUB_CLIENT_TOKEN
+  if (!NITRO_GITHUB_CLIENT_TOKEN) {
+    throw new Error('Missing NITRO_GITHUB_CLIENT_TOKEN environment variable')
   }
 
   const res = await $fetch<{
@@ -27,7 +27,7 @@ export const getDaysOnGithub = async (
   }>('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
-      Authorization: `bearer ${GITHUB_CLIENT_TOKEN}`
+      Authorization: `bearer ${NITRO_GITHUB_CLIENT_TOKEN}`
     },
     body: {
       query: `
@@ -55,7 +55,7 @@ export const getDaysOnGithub = async (
 
   const contributionDays =
     data.user.contributionsCollection.contributionCalendar.weeks.flatMap(
-      (week) => {
+      week => {
         return week.contributionDays
       }
     )

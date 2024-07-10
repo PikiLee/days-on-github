@@ -10,16 +10,10 @@ export interface GithubData {
   }[]
 }
 
-export async function renderHTML({
-  daysOnGithub,
-  percentageDaysOnGithub
-}: GithubData) {
+export async function renderHTML(githubData: GithubData) {
   const template = await readFile('./index.html', 'utf-8')
   const css = await readFile('./dist/output.css', 'utf-8')
-  const rendered = await render({
-    daysOnGithub,
-    percentageDaysOnGithub
-  })
+  const rendered = await render(githubData)
 
   const html = template
     .replace('<script type="module" src="./src/main.tsx"></script>', '')
