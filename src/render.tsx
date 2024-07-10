@@ -3,13 +3,10 @@ import { StrictMode } from 'react'
 import App from './App'
 import { GithubData } from '@/utils/renderHTML'
 
-export function render({ daysOnGithub, percentageDaysOnGithub }: GithubData) {
+export function render(githubData: GithubData) {
   const html = renderToString(
     <StrictMode>
-      <App
-        daysOnGithub={daysOnGithub}
-        percentageDaysOnGithub={percentageDaysOnGithub}
-      />
+      <App githubData={githubData} />
     </StrictMode>
   )
   return html

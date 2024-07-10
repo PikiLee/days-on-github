@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client'
+import { mockGithubData } from '../utils/getDaysOnGithub/mockData'
 import App from './App'
 
 const root = createRoot(document.getElementById('root'))
-root.render(<App daysOnGithub={200} percentageDaysOnGithub={50} />)
+root.render(<App githubData={mockGithubData} />)
