@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import { mockGithubData } from '../utils/getDaysOnGithub/mockData'
+import { mockGithubData } from '../utils/mockData'
 import App from './App'
 
 const root = createRoot(document.getElementById('root'))

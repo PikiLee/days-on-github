@@ -1,7 +1,7 @@
 import { $fetch } from 'ofetch'
 import { describe, it, expect, vi } from 'vitest'
 import { getDaysOnGithub } from './getDaysOnGithub'
-import { mockGithubResponse } from './mockData'
+import { mockGithubResponse } from '../mockData'
 
 // Mocking the $fetch function
 vi.mock('ofetch', () => {
