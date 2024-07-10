@@ -12,7 +12,7 @@
     "test": "vitest",
     "dev:app": "vite",
     "build:app": "pnpm run build:css && pnpm run build:render",
-    "build:css": "tailwindcss -i ./src/index.css -o ./dist/output.css --minify",
+    "build:css": "tailwindcss -i ./src/index.css -o ./assets/output.css --minify",
     "build:render": "vite build --outDir dist/server --ssr src/render.tsx",
     "build:css:watch": "tailwindcss -i ./src/index.css -o ./dist/output.css --minify --watch",
     "build:render:watch": "vite build --outDir dist/server --ssr src/render.tsx --watch"

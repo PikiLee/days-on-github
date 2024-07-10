@@ -6,7 +6,10 @@ export default eventHandler(async event => {
   const username = getRouterParams(event).username
 
   const githubData = await getDaysOnGithub(username)
-  const html = await renderHTML(githubData)
+  const storage = useStorage('assets:server')
+  const template = await storage.getItem<string>('index.html')
+  const css = await storage.getItem<string>('output.css')
+  const html = await renderHTML(githubData, template, css)
 
   const image = await nodeHtmlToImage({
     html

@@ -1,5 +1,3 @@
-import { readFile } from 'fs/promises'
-import path from 'path'
 import { render } from '~/dist/server/render.mjs'
 
 export interface GithubData {
@@ -11,15 +9,11 @@ export interface GithubData {
   }[]
 }
 
-export async function renderHTML(githubData: GithubData) {
-  const template = await readFile(
-    path.join(process.cwd(), './index.html'),
-    'utf-8'
-  )
-  const css = await readFile(
-    path.join(process.cwd(), './dist/output.css'),
-    'utf-8'
-  )
+export async function renderHTML(
+  githubData: GithubData,
+  template: string,
+  css: string
+) {
   const rendered = await render(githubData)
 
   const html = template
