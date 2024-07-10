@@ -1,5 +1,5 @@
 import { readFile } from 'fs/promises'
-import { render } from '../dist/server/render.mjs'
+import { render } from '~/dist/server/render.mjs'
 
 export interface GithubData {
   daysOnGithub: number
@@ -10,7 +10,7 @@ export interface GithubData {
   }[]
 }
 
-export default async function renderHTML({
+export async function renderHTML({
   daysOnGithub,
   percentageDaysOnGithub
 }: GithubData) {
