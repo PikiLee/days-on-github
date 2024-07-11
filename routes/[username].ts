@@ -19,7 +19,7 @@ export default eventHandler(async event => {
     puppeteerArgs: {
       args: chrome.args,
       executablePath: await chrome.executablePath,
-      headless: chrome.headless
+      headless: false
     }
   })
 
