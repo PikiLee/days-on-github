@@ -3,7 +3,7 @@ import type { GithubData } from '../renderHTML/renderHTML'
 
 export const getDaysOnGithub = async (
   username: string
-): Promise<GithubData> => {
+): Promise<GithubData | null> => {
   const NITRO_GITHUB_CLIENT_TOKEN = process.env.NITRO_GITHUB_CLIENT_TOKEN
   if (!NITRO_GITHUB_CLIENT_TOKEN) {
     throw new Error('Missing NITRO_GITHUB_CLIENT_TOKEN environment variable')
@@ -52,6 +52,11 @@ export const getDaysOnGithub = async (
     }
   })
   const data = res.data
+  console.log('data', data)
+
+  if (!data.user) {
+    return null
+  }
 
   const contributionDays =
     data.user.contributionsCollection.contributionCalendar.weeks.flatMap(

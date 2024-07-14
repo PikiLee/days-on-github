@@ -6,15 +6,16 @@
 
 # Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
 
-ARG NODE_VERSION=18.20.3
 ARG PNPM_VERSION=9.4.0
 
 ################################################################################
 # Use node image for base image for all stages.
-FROM node:${NODE_VERSION}-alpine as base
+FROM ghcr.io/puppeteer/puppeteer:22.13.0 as base
 
 # Set working directory for all build stages.
 WORKDIR /usr/src/app
+
+USER root
 
 # Install pnpm.
 RUN --mount=type=cache,target=/root/.npm \
@@ -57,7 +58,6 @@ FROM base as final
 # Use production node environment by default.
 ENV NODE_ENV production
 
-# Run the application as a non-root user.
 USER node
 
 # Copy package.json so that package manager commands can be used.
@@ -67,7 +67,6 @@ COPY package.json .
 # the built application from the build stage into the image.
 COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app .
-
 
 # Expose the port that the application listens on.
 EXPOSE 3000
