@@ -1,6 +1,7 @@
 import nodeHtmlToImage from 'node-html-to-image'
 import { getDaysOnGithub } from '../../utils/getDaysOnGithub/getDaysOnGithub'
 import { renderHTML } from '../../utils/renderHTML'
+import sharp from 'sharp'
 
 export default defineCachedEventHandler(
   async event => {
@@ -15,12 +16,14 @@ export default defineCachedEventHandler(
 
     const html = await renderHTML(githubData)
 
-    const image = await nodeHtmlToImage({
+    const _image = await nodeHtmlToImage({
       html,
       puppeteerArgs: {
         executablePath: '/usr/bin/google-chrome-stable'
-      }
+      },
     })
+
+    const image =  sharp(Array.isArray(_image) ? _image[0] : _image).png({compressionLevel: 9})
 
     setResponseHeader(event, 'Content-Type', 'image/png')
 
