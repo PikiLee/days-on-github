@@ -1,9 +1,13 @@
 import nodeHtmlToImage from 'node-html-to-image'
-import { getDaysOnGithub } from '../../utils/getDaysOnGithub/getDaysOnGithub'
+import { getDaysOnGithub as uncachedGetDaysOnGithub } from '../../utils/getDaysOnGithub/getDaysOnGithub'
 import { renderHTML } from '../../utils/renderHTML'
 import sharp from 'sharp'
 
-export default defineCachedEventHandler(
+const getDaysOnGithub = cachedFunction(uncachedGetDaysOnGithub, {
+  maxAge: 60 * 60 * 24 // 1 day
+})
+
+export default defineEventHandler(
   async event => {
     const username = getRouterParams(event).username
     console.log('username', username)
@@ -28,8 +32,5 @@ export default defineCachedEventHandler(
     setResponseHeader(event, 'Content-Type', 'image/png')
 
     return image
-  },
-  {
-    maxAge: 60 * 60 * 24 // 1 day
   }
 )
