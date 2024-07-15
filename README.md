@@ -53,5 +53,5 @@ We use docker to deploy the application
 2. Copy 'compose.yaml', 'compose.prod.yaml', '.env', 'user_conf.d' to the server and run the following command.
 
 ```bash
-docker compose up -d
+docker compose -f compose.yaml -f compose.prod.yaml up -d
 ```
