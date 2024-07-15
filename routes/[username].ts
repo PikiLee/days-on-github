@@ -3,6 +3,7 @@ import { getDaysOnGithub } from '../utils/getDaysOnGithub'
 
 export default eventHandler(async (event) => {
   const username = getRouterParams(event).username
+  console.log('username', username);
 
   const { daysOnGithub, percentageDaysOnGithub } =
     await getDaysOnGithub(username)
