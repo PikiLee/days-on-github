@@ -37,7 +37,7 @@ jobs:
       - name: Test
         run: |
           export NITRO_GITHUB_CLIENT_TOKEN=${{ secrets.NITRO_GITHUB_CLIENT_TOKEN }}
-          docker run --rm ${{ env.TEST_TAG }} -d
+          docker run --rm -d ${{ env.TEST_TAG }}
           curl 'http://localhost:3000/username/pikilee'
 
       - name: Build and push
