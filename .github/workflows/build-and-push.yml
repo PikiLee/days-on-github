@@ -38,7 +38,7 @@ jobs:
 
       - name: Test
         run: |
-          docker run --rm ${{ env.TEST_TAG }}
+          docker run --rm -d ${{ env.TEST_TAG }}
 
       - name: Wait for response
         uses: cygnetdigital/wait_for_response@v2.0.0
