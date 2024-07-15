@@ -16,7 +16,8 @@
     "build:render": "vite build --outDir dist/server --ssr src/render.tsx",
     "build:css:watch": "tailwindcss -i ./src/index.css -o ./dist/output.css --minify --watch",
     "build:render:watch": "vite build --outDir dist/server --ssr src/render.tsx --watch",
-    "package": "esno package.mts"
+    "package": "esno package.mts",
+    "build:docker": "docker build -t days-on-github-test ."
   },
   "dependencies": {
     "clsx": "^2.1.1",
