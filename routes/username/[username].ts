@@ -27,7 +27,7 @@ export default defineEventHandler(
       },
     })
 
-    const image =  sharp(Array.isArray(_image) ? _image[0] : _image).png({compressionLevel: 9})
+    const image = await sharp(Array.isArray(_image) ? _image[0] : _image).png({compressionLevel: 9}).toBuffer()
 
     setResponseHeader(event, 'Content-Type', 'image/png')
 
