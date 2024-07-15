@@ -1,0 +1,9 @@
+services:
+  server:
+    image: pikilee/days-on-github:latest
+    cap_add:
+      - SYS_ADMIN
+  nginx:
+    environment:
+      - STAGING=0
+      - DEBUG=0
