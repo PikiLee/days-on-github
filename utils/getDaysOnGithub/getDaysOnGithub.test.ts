@@ -27,4 +27,18 @@ describe('getDaysOnGithub', () => {
       'Missing NITRO_GITHUB_CLIENT_TOKEN environment variable'
     )
   })
+
+  it('should return null if user is not found', async () => {
+    vi.mocked($fetch).mockResolvedValue({
+      data: {
+        user: null
+      }
+    })
+
+    vi.stubEnv('NITRO_GITHUB_CLIENT_TOKEN', 'Token')
+
+    const result = await getDaysOnGithub('testuser')
+
+    expect(result).toBeNull()
+  })
 })
