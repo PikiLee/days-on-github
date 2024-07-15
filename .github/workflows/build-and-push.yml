@@ -2,8 +2,8 @@ name: build-and-push-docker-image
 
 on:
   push:
-  pull_request:
-    types: [opened, reopened]
+    branches-ignore:
+      - 'renovate/**'
 
 env:
   TEST_TAG: ${{ vars.DOCKERHUB_USERNAME }}/days-on-github:test
