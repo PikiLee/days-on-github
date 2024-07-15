@@ -36,7 +36,7 @@ jobs:
           load: true
           tags: ${{ env.TEST_TAG }}
 
-      - name: Test
+      - name: Run container
         run: |
           docker run --rm -d --cap-add=SYS_ADMIN -p 3000:3000 --env NITRO_GITHUB_CLIENT_TOKEN=${{secrets.NITRO_GITHUB_CLIENT_TOKEN}} ${{ env.TEST_TAG }}
 
