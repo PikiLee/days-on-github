@@ -1,6 +1,6 @@
 services:
   server:
-    image: pikilee/days-on-github:pr-41
+    image: pikilee/days-on-github:latest
     cap_add:
       - SYS_ADMIN
   nginx:
