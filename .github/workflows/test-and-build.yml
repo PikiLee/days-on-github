@@ -3,6 +3,9 @@ name: ci
 on:
   push:
 
+env:
+  TEST_TAG: pikilee/days-on-github:test
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -34,7 +37,7 @@ jobs:
       - name: Test
         run: |
           export NITRO_GITHUB_CLIENT_TOKEN=${{ secrets.NITRO_GITHUB_CLIENT_TOKEN }}
-          docker run --rm ${{ steps.meta.outputs.tags }}
+          docker run --rm ${{ env.TEST_TAG }} -d
           curl 'http://localhost:3000/username/pikilee'
 
       - name: Build and push
