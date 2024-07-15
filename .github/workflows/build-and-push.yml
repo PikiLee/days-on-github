@@ -3,9 +3,11 @@ name: build-and-push-docker-image
 on:
   push:
     branches:
-      - '![master]'
+      - master
     tags:
       - 'v*'
+  pull_request:
+    types: [opened, reopened, edited]
 
 jobs:
   docker:
