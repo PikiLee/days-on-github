@@ -17,7 +17,7 @@
     "build:css:watch": "tailwindcss -i ./src/index.css -o ./dist/output.css --minify --watch",
     "build:render:watch": "vite build --outDir dist/server --ssr src/render.tsx --watch",
     "package": "esno package.mts",
-    "build:docker": "docker build -t days-on-github-test ."
+    "test:docker": "docker build -t days-on-github-test . && docker run --rm --cap-add=SYS_ADMIN -p 3000:3000 --env-file .env days-on-github-test"
   },
   "dependencies": {
     "clsx": "^2.1.1",
