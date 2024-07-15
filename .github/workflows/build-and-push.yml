@@ -6,7 +6,8 @@ on:
     types: [opened, reopened]
 
 env:
-  TEST_TAG: user/app:test
+  TEST_TAG: ${{ vars.DOCKERHUB_USERNAME }}/days-on-github:test
+  IMAGE_NAME: ${{ vars.DOCKERHUB_USERNAME }}/days-on-github
 
 jobs:
   docker:
@@ -16,7 +17,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: pikilee/days-on-github
+          images: ${{ env.IMAGE_NAME }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
