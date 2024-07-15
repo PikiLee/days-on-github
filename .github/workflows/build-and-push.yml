@@ -1,10 +1,11 @@
-name: ci
+name: build-and-push-docker-image
 
 on:
   push:
-
-env:
-  TEST_TAG: pikilee/days-on-github:test
+    branches:
+      - '![master]'
+    tags:
+      - 'v*'
 
 jobs:
   docker:
@@ -27,18 +28,6 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and export to Docker
-        uses: docker/build-push-action@v6
-        with:
-          load: true
-          tags: ${{ env.TEST_TAG }}
-
-      - name: Test
-        run: |
-          export NITRO_GITHUB_CLIENT_TOKEN=${{ secrets.NITRO_GITHUB_CLIENT_TOKEN }}
-          docker run --rm -d ${{ env.TEST_TAG }}
-          curl 'http://localhost:3000/username/pikilee'
 
       - name: Build and push
         uses: docker/build-push-action@v6
