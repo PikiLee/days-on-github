@@ -3,3 +3,7 @@ services:
     image: pikilee/days-on-github:pr-41
     cap_add:
       - SYS_ADMIN
+  nginx:
+    environment:
+      - STAGING=0
+      - DEBUG=0

@@ -20,6 +20,9 @@ services:
   nginx:
     image: jonasal/nginx-certbot:latest
     restart: unless-stopped
+    environment:
+      - STAGING=1
+      - DEBUG=1
     env_file:
       - .env
     ports:
