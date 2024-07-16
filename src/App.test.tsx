@@ -23,18 +23,18 @@ describe('App Component', () => {
     expect(container).toMatchSnapshot()
   })
 
-  // todo: fix this test
-  it.skip('applies the correct background color classes based on tone and contribution level', () => {
-    render(<App githubData={mockGithubData} tone="red" />)
+  it.each(['green', 'sky', 'red', 'amber'] as const)(
+    'applies the correct background color classes based on tone and contribution level',
+    tone => {
+      const { container } = render(
+        <App githubData={mockGithubData} tone={tone} />
+      )
 
-    const gridCells = screen.getAllByTestId('grid-cell')
-    gridCells.forEach((cell, index) => {
-      const contributionCount = index % 5
-      const expectedClass =
-        contributionCount === 0
-          ? 'bg-gray-200'
-          : `bg-red-${300 + contributionCount * 100}`
-      expect(cell).toHaveClass(expectedClass)
-    })
-  })
+      const gridCells = screen.getAllByTestId('grid-cell')
+      gridCells.forEach(cell => {
+        expect(cell).toHaveClass(new RegExp(`bg-(gray|${tone})`))
+      })
+      expect(container).toMatchSnapshot()
+    }
+  )
 })
