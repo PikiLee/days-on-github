@@ -94,15 +94,17 @@ const textColorClasses = {
   rose: 'text-rose-500'
 }
 
+export interface AppProps {
+  githubData: GithubData
+  includeText?: boolean
+  tone?: Tone
+}
+
 export default function App({
   githubData: { daysOnGithub, percentageDaysOnGithub, contributionDays },
   includeText = true,
   tone = 'green'
-}: {
-  githubData: GithubData
-  includeText?: boolean
-  tone?: Tone
-}) {
+}: AppProps) {
   return (
     <div className="bg-white p-4">
       {includeText && (

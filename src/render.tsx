@@ -1,12 +1,11 @@
 import { renderToString } from 'react-dom/server'
 import { StrictMode } from 'react'
-import App from './App'
-import { GithubData } from '@/utils/renderHTML'
+import App, { AppProps } from './App'
 
-export function render(githubData: GithubData) {
+export function render(props: AppProps) {
   const html = renderToString(
     <StrictMode>
-      <App githubData={githubData} />
+      <App {...props} />
     </StrictMode>
   )
   return html
