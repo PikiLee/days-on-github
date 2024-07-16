@@ -1,5 +1,5 @@
 import { readFile } from 'fs/promises'
-import { render } from '~/dist/server/render.mjs'
+import { render } from '../../dist/server/render.mjs'
 
 export interface GithubData {
   daysOnGithub: number

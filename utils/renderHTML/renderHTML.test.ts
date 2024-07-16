@@ -1,20 +1,30 @@
+import fsp from 'fs/promises'
 import { describe, it, expect, vi } from 'vitest'
 import { renderHTML, GithubData } from './renderHTML'
 
-vi.mock('fs/promises', async importOriginal => {
-  // @ts-ignore
-  const { readFile } = await importOriginal()
-  return {
-    readFile: vi.fn((path: string) =>
-      path.endsWith('index.html')
-        ? readFile('./index.html', 'utf-8')
-        : 'body { background-color: white; }'
-    )
-  }
-})
+vi.mock('fs/promises')
+
+vi.mocked(fsp.readFile)
+  .mockResolvedValueOnce(
+    `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Days on Github</title>
+    <link rel="stylesheet" href="./src/index.css" />
+  </head>
+  <body>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>
+`
+  )
+  .mockResolvedValueOnce('body { background-color: white; }')
 
 const mockRenderedContent = '<div>Github Stats</div>'
-vi.mock('~/dist/server/render.mjs', () => ({
+vi.mock('../../dist/server/render.mjs', () => ({
   render: vi.fn(() => mockRenderedContent)
 }))
 
@@ -24,21 +34,6 @@ describe('renderHTML', () => {
 
     const result = await renderHTML(githubData)
 
-    expect(result).toMatchInlineSnapshot(`
-      "<!doctype html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Days on Github</title>
-          <style>body { background-color: white; }</style>
-        </head>
-        <body>
-          <div id="root"><div>Github Stats</div></div>
-          
-        </body>
-      </html>
-      "
-    `)
+    expect(result).toMatchSnapshot()
   })
 })

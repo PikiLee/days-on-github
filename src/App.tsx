@@ -40,8 +40,8 @@ export default function App({
                 'col-span-1 w-2 aspect-square rounded-[1px] border-gray-800/10 border-[0.8px]',
                 backgroundColorClass
               )}
-              data-contributionCount={day.contributionCount}
-              data-testId="grid-cell"
+              data-contribution-count={day.contributionCount}
+              data-testid="grid-cell"
             ></div>
           )
         })}
