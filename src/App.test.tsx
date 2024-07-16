@@ -34,4 +34,14 @@ describe('App Component', () => {
       })
     }
   )
+
+  it.each(tailwindColors)(
+    'applies the correct text color class based on tone',
+    tone => {
+      render(<App githubData={mockGithubData} tone={tone} />)
+
+      const textEl = screen.getByText(text)
+      expect(textEl).toHaveClass(new RegExp(`text-${tone}`))
+    }
+  )
 })

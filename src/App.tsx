@@ -69,6 +69,31 @@ const backgroundColorClasses = {
   rose: ['bg-rose-300', 'bg-rose-400', 'bg-rose-500', 'bg-rose-600']
 } satisfies Record<Tone, string[]>
 
+const textColorClasses = {
+  slate: 'text-slate-500',
+  // gray: 'text-gray-500',
+  zinc: 'text-zinc-500',
+  neutral: 'text-neutral-500',
+  stone: 'text-stone-500',
+  red: 'text-red-500',
+  orange: 'text-orange-500',
+  amber: 'text-amber-500',
+  yellow: 'text-yellow-500',
+  lime: 'text-lime-500',
+  green: 'text-green-500',
+  emerald: 'text-emerald-500',
+  teal: 'text-teal-500',
+  cyan: 'text-cyan-500',
+  sky: 'text-sky-500',
+  blue: 'text-blue-500',
+  indigo: 'text-indigo-500',
+  violet: 'text-violet-500',
+  purple: 'text-purple-500',
+  fuchsia: 'text-fuchsia-500',
+  pink: 'text-pink-500',
+  rose: 'text-rose-500'
+}
+
 export default function App({
   githubData: { daysOnGithub, percentageDaysOnGithub, contributionDays },
   includeText = true,
@@ -81,7 +106,12 @@ export default function App({
   return (
     <div className="bg-white p-4">
       {includeText && (
-        <h1 className="text-lg font-bold text-green-500 text-center mb-2">{`Spent ${daysOnGithub} (${percentageDaysOnGithub}%) days on Github in last 365 days.`}</h1>
+        <h1
+          className={clsx(
+            'text-lg font-bold text-center mb-2',
+            textColorClasses[tone]
+          )}
+        >{`Spent ${daysOnGithub} (${percentageDaysOnGithub}%) days on Github in last 365 days.`}</h1>
       )}
       <div className="grid grid-rows-7 grid-flow-col auto-cols-min gap-0.5">
         {contributionDays.map((day, index) => {
