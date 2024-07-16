@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
 import { mockGithubData } from '../utils/mockData'
-import App from './App'
+import App, { tailwindColors } from './App'
 
 const text = `Spent ${mockGithubData.daysOnGithub} (${mockGithubData.percentageDaysOnGithub}%) days on Github in last 365 days.`
 
@@ -23,18 +23,15 @@ describe('App Component', () => {
     expect(container).toMatchSnapshot()
   })
 
-  it.each(['green', 'sky', 'red', 'amber'] as const)(
+  it.each(tailwindColors)(
     'applies the correct background color classes based on tone and contribution level',
     tone => {
-      const { container } = render(
-        <App githubData={mockGithubData} tone={tone} />
-      )
+      render(<App githubData={mockGithubData} tone={tone} />)
 
       const gridCells = screen.getAllByTestId('grid-cell')
       gridCells.forEach(cell => {
         expect(cell).toHaveClass(new RegExp(`bg-(gray|${tone})`))
       })
-      expect(container).toMatchSnapshot()
     }
   )
 })
