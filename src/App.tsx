@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { GithubData } from '../utils/renderHTML'
+import { getContributionLevel } from './utils/getContributionLevel/getContributionLevel'
 
 const backgroundColorClasses = [
   'bg-green-300',
@@ -21,7 +22,7 @@ export default function App({
           const backgroundColorClass =
             day.contributionCount === 0
               ? 'bg-gray-200'
-              : backgroundColorClasses[Math.ceil(day.contributionCount / 10)]
+              : backgroundColorClasses[getContributionLevel(day.contributionCount)]
           return (
             <div
               key={index}
@@ -29,6 +30,7 @@ export default function App({
                 'col-span-1 w-2 aspect-square rounded-[1px] border-gray-800/10 border-[0.8px]',
                 backgroundColorClass
               )}
+              data-contributionCount={day.contributionCount}
             ></div>
           )
         })}
