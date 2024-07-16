@@ -7,6 +7,8 @@
 # You can add other services your application may depend on here, such as a
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
+name: days-on-github
+
 services:
   server:
     build:
@@ -17,8 +19,10 @@ services:
       - 3000:3000
     cap_add:
       - SYS_ADMIN
+    container_name: days-on-github-server
   nginx:
     image: jonasal/nginx-certbot:latest
+    container_name: names-on-github-nginx
     restart: unless-stopped
     environment:
       - STAGING=1
