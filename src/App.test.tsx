@@ -15,9 +15,12 @@ describe('App Component', () => {
   })
 
   it('renders the component without text', () => {
-    render(<App githubData={mockGithubData} includeText={false} />)
+    const { container } = render(
+      <App githubData={mockGithubData} includeText={false} />
+    )
 
     expect(screen.queryByText(text)).not.toBeInTheDocument()
+    expect(container).toMatchSnapshot()
   })
 
   // todo: fix this test
