@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { renderHTML, GithubData } from './renderHTML'
 
-vi.mock('fs/promises', async (importOriginal) => {
+vi.mock('fs/promises', async importOriginal => {
   // @ts-ignore
   const { readFile } = await importOriginal()
   return {
