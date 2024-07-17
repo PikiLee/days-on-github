@@ -21,7 +21,7 @@ services:
       - SYS_ADMIN
     container_name: days-on-github-server
     volumes:
-      - ./logs/server:/var/log/
+      - ./logs/server:/var/log/server
   nginx:
     image: jonasal/nginx-certbot:latest
     container_name: names-on-github-nginx
