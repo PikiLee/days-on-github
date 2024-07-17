@@ -36,7 +36,8 @@ export default defineEventHandler(async event => {
   console.log('html', html)
 
   const nodeHTMLToImageProp: Parameters<typeof nodeHtmlToImage>[0] = {
-    html
+    html,
+    transparent: true
   }
   if (process.env.NODE_ENV === 'production') {
     nodeHTMLToImageProp.puppeteerArgs = {

@@ -117,7 +117,7 @@ export default function App({
   tone = 'green'
 }: AppProps) {
   return (
-    <div className="bg-white p-4 flex flex-col gap-2">
+    <div className="p-4 flex flex-col gap-2">
       <div
         className={clsx(
           'flex items-center justify-center gap-2',
