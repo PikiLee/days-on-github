@@ -11,6 +11,7 @@ export interface GithubData {
   }[]
   name: string
   login: string
+  avatarUrl: string | null
 }
 
 export async function renderHTML(props: AppProps) {

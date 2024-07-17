@@ -24,6 +24,7 @@ export const getDaysOnGithub = async (
         }
         name: string
         login: string
+        avatarUrl: string | null
       }
     }
   }>('https://api.github.com/graphql', {
@@ -47,6 +48,7 @@ export const getDaysOnGithub = async (
                     }
                     name
     								login
+                    avatarUrl
                   }
                 }
                 `,
@@ -81,6 +83,7 @@ export const getDaysOnGithub = async (
     percentageDaysOnGithub,
     contributionDays,
     name: data.user.name,
-    login: data.user.login
+    login: data.user.login,
+    avatarUrl: data.user.avatarUrl
   }
 }

@@ -1680,7 +1680,9 @@ export const mockGithubResponse = {
         }
       },
       name: 'Xin',
-      login: 'PikiLee'
+      login: 'PikiLee',
+      avatarUrl:
+        'https://avatars.githubusercontent.com/u/37203836?u=da1d1ddaf491d6d80a32efe57bd8e2f1cf3d36f9&v=4'
     }
   }
 }
@@ -3151,5 +3153,7 @@ export const mockGithubData = {
   daysOnGithub: 255,
   percentageDaysOnGithub: 70,
   name: 'Xin',
-  login: 'PikiLee'
+  login: 'PikiLee',
+  avatarUrl:
+    'https://avatars.githubusercontent.com/u/37203836?u=da1d1ddaf491d6d80a32efe57bd8e2f1cf3d36f9&v=4'
 }
