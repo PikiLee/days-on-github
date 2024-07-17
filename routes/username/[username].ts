@@ -3,7 +3,7 @@ import sharp from 'sharp'
 import { z } from 'zod'
 import { getDaysOnGithub as uncachedGetDaysOnGithub } from '../../utils/getDaysOnGithub/getDaysOnGithub'
 import { renderHTML } from '../../utils/renderHTML'
-import { tailwindColors } from '~/src/App'
+import { Include, tailwindColors } from '~/src/App'
 
 const getDaysOnGithub = cachedFunction(uncachedGetDaysOnGithub, {
   maxAge: 60 * 60 * 24 // 1 day
@@ -17,13 +17,10 @@ export default defineEventHandler(async event => {
     z
       .object({
         tone: z.enum(tailwindColors).optional(),
-        includeText: z
+        include: z
           .string()
           .optional()
-          .transform(v => {
-            // includeText is true by default
-            return v !== 'false'
-          })
+          .transform(v => v.split(',') as Include[])
       })
       .parse(data)
   )
@@ -36,6 +33,7 @@ export default defineEventHandler(async event => {
   }
 
   const html = await renderHTML({ githubData, ...query })
+  console.log('html', html)
 
   const nodeHTMLToImageProp: Parameters<typeof nodeHtmlToImage>[0] = {
     html
