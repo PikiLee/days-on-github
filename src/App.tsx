@@ -106,7 +106,8 @@ export default function App({
     percentageDaysOnGithub,
     contributionDays,
     name,
-    login
+    login,
+    avatarUrl
   },
   includeText = true,
   tone = 'green'
@@ -119,6 +120,11 @@ export default function App({
           textColorClasses[tone]
         )}
       >
+        {avatarUrl && (
+          <div className="w-9 rounded-full aspect-square overflow-hidden border-[1px] border-gray-200">
+            <img src={avatarUrl} alt={`${name}'s avatar`} />
+          </div>
+        )}
         <div className="text-lg font-semibold">{name}</div>
         <div className="text-sm opacity-60">{login}</div>
       </div>
