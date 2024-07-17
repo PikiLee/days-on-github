@@ -32,7 +32,7 @@ describe('renderHTML', () => {
   it('should render HTML with the provided Github data', async () => {
     const githubData = {} as GithubData
 
-    const result = await renderHTML(githubData)
+    const result = await renderHTML({ githubData })
 
     expect(result).toMatchSnapshot()
   })
