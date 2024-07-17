@@ -1,4 +1,5 @@
 import { readFile } from 'fs/promises'
+
 import { render } from '../../dist/server/render.mjs'
 import { AppProps } from '~/src/App'
 

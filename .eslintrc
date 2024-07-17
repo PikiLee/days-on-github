@@ -1,8 +1,9 @@
 {
   "root": true,
   "extends": ["@nuxtjs/eslint-config-typescript", "prettier"],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "unused-imports"],
   "rules": {
+    "unused-imports/no-unused-vars": "error",
     "prettier/prettier": [
       "error",
       {},

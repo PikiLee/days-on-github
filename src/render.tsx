@@ -1,5 +1,6 @@
-import { renderToString } from 'react-dom/server'
 import { StrictMode } from 'react'
+import { renderToString } from 'react-dom/server'
+
 import App, { AppProps } from './App'
 
 export function render(props: AppProps) {

@@ -1,6 +1,7 @@
 import { $fetch } from 'ofetch'
-import { describe, it, expect, vi } from 'vitest'
-import { mockGithubResponse, mockGithubData } from '../mockData'
+import { describe, expect, it, vi } from 'vitest'
+
+import { mockGithubData, mockGithubResponse } from '../mockData'
 import { getDaysOnGithub } from './getDaysOnGithub'
 
 // Mocking the $fetch function

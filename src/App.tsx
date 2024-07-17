@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+
 import { GithubData } from '../utils/renderHTML'
 import { getContributionLevel } from './utils/getContributionLevel/getContributionLevel'
 

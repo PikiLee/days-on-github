@@ -1,6 +1,7 @@
 import fsp from 'fs/promises'
-import { describe, it, expect, vi } from 'vitest'
-import { renderHTML, GithubData } from './renderHTML'
+import { describe, expect, it, vi } from 'vitest'
+
+import { GithubData, renderHTML } from './renderHTML'
 
 vi.mock('fs/promises')
 

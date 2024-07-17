@@ -1,4 +1,5 @@
 import { $fetch } from 'ofetch'
+
 import type { GithubData } from '../renderHTML/renderHTML'
 
 export const getDaysOnGithub = async (
