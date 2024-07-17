@@ -5,6 +5,20 @@ exports[`App Component > renders the component with default props 1`] = `
   <div
     class="bg-white p-4"
   >
+    <div
+      class="flex items-center justify-center gap-2 text-green-500"
+    >
+      <div
+        class="text-lg font-semibold"
+      >
+        Xin
+      </div>
+      <div
+        class="text-sm opacity-60"
+      >
+        PikiLee
+      </div>
+    </div>
     <h1
       class="text-lg font-bold text-center mb-2 text-green-500"
     >
@@ -1848,6 +1862,20 @@ exports[`App Component > renders the component without text 1`] = `
   <div
     class="bg-white p-4"
   >
+    <div
+      class="flex items-center justify-center gap-2 text-green-500"
+    >
+      <div
+        class="text-lg font-semibold"
+      >
+        Xin
+      </div>
+      <div
+        class="text-sm opacity-60"
+      >
+        PikiLee
+      </div>
+    </div>
     <div
       class="grid grid-rows-7 grid-flow-col auto-cols-min gap-0.5"
     >

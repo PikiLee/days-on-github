@@ -9,6 +9,8 @@ export interface GithubData {
     date?: string
     contributionCount?: number
   }[]
+  name: string
+  login: string
 }
 
 export async function renderHTML(props: AppProps) {

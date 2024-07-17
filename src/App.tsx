@@ -101,12 +101,27 @@ export interface AppProps {
 }
 
 export default function App({
-  githubData: { daysOnGithub, percentageDaysOnGithub, contributionDays },
+  githubData: {
+    daysOnGithub,
+    percentageDaysOnGithub,
+    contributionDays,
+    name,
+    login
+  },
   includeText = true,
   tone = 'green'
 }: AppProps) {
   return (
     <div className="bg-white p-4">
+      <div
+        className={clsx(
+          'flex items-center justify-center gap-2',
+          textColorClasses[tone]
+        )}
+      >
+        <div className="text-lg font-semibold">{name}</div>
+        <div className="text-sm opacity-60">{login}</div>
+      </div>
       {includeText && (
         <h1
           className={clsx(
