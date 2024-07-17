@@ -5,5 +5,6 @@ node_modules
 .output
 .env
 dist
-nginx
+logs
 days-on-github.zip
+
