@@ -23,7 +23,7 @@ export default defineEventHandler(async event => {
           include: z
             .string()
             .optional()
-            .transform(v => v.split(',') as Include[])
+            .transform(v => (v ? (v.split(',') as Include[]) : undefined))
         })
         .parse(data)
     )
