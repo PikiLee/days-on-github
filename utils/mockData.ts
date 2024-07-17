@@ -1678,7 +1678,9 @@ export const mockGithubResponse = {
             }
           ]
         }
-      }
+      },
+      name: 'Xin',
+      login: 'PikiLee'
     }
   }
 }
@@ -3147,5 +3149,7 @@ export const mockGithubData = {
     }
   ],
   daysOnGithub: 255,
-  percentageDaysOnGithub: 70
+  percentageDaysOnGithub: 70,
+  name: 'Xin',
+  login: 'PikiLee'
 }
