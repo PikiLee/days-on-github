@@ -6,7 +6,12 @@ const root = createRoot(document.getElementById('root'))
 root.render(
   <>
     {tailwindColors.map(tone => (
-      <App githubData={mockGithubData} tone={tone} key={tone} />
+      <App
+        githubData={mockGithubData}
+        tone={tone}
+        key={tone}
+        include={['daysOnGithubText', 'avatar', 'name']}
+      />
     ))}
   </>
 )

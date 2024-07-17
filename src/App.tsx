@@ -94,9 +94,13 @@ const textColorClasses = {
   rose: 'text-rose-500'
 }
 
+export const includeOptions = ['avatar', 'name', 'daysOnGithubText'] as const
+
+export type Include = (typeof includeOptions)[number]
+
 export interface AppProps {
   githubData: GithubData
-  includeText?: boolean
+  include?: Include[]
   tone?: Tone
 }
 
@@ -109,31 +113,39 @@ export default function App({
     login,
     avatarUrl
   },
-  includeText = true,
+  include = [],
   tone = 'green'
 }: AppProps) {
   return (
-    <div className="bg-white p-4">
+    <div className="bg-white p-4 flex flex-col gap-2">
       <div
         className={clsx(
           'flex items-center justify-center gap-2',
           textColorClasses[tone]
         )}
       >
-        {avatarUrl && (
-          <div className="w-9 rounded-full aspect-square overflow-hidden border-[1px] border-gray-200">
+        {include.includes('avatar') && avatarUrl && (
+          <div
+            className="w-9 rounded-full aspect-square overflow-hidden border-[1px] border-gray-200"
+            data-testid="avatar"
+          >
             <img src={avatarUrl} alt={`${name}'s avatar`} />
           </div>
         )}
-        <div className="text-lg font-semibold">{name}</div>
-        <div className="text-sm opacity-60">{login}</div>
+        {include.includes('name') && (
+          <div data-testid="name">
+            <span className="text-lg font-semibold">{name}</span>{' '}
+            <span className="text-xs opacity-60">{login}</span>
+          </div>
+        )}
       </div>
-      {includeText && (
+      {include.includes('daysOnGithubText') && (
         <h1
           className={clsx(
-            'text-lg font-bold text-center mb-2',
+            'text-lg font-bold text-center',
             textColorClasses[tone]
           )}
+          data-testid="daysOnGithubText"
         >{`Spent ${daysOnGithub} (${percentageDaysOnGithub}%) days on Github in last 365 days.`}</h1>
       )}
       <div className="grid grid-rows-7 grid-flow-col auto-cols-min gap-0.5">
