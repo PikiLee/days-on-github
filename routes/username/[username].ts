@@ -33,7 +33,6 @@ export default defineEventHandler(async event => {
   }
 
   const html = await renderHTML({ githubData, ...query })
-  console.log('html', html)
 
   const nodeHTMLToImageProp: Parameters<typeof nodeHtmlToImage>[0] = {
     html,
