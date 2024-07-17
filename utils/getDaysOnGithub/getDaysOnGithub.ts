@@ -59,7 +59,6 @@ export const getDaysOnGithub = async (
     }
   })
   const data = res.data
-  console.log('data', data)
 
   if (!data.user) {
     return null
