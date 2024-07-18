@@ -1,7 +1,6 @@
-import nodeHtmlToImage from 'node-html-to-image'
 import sharp from 'sharp'
 import { z } from 'zod'
-
+import { launch } from 'puppeteer'
 import { getDaysOnGithub as uncachedGetDaysOnGithub } from '../../utils/getDaysOnGithub/getDaysOnGithub'
 import { renderHTML } from '../../utils/renderHTML'
 import { Include, tailwindColors } from '~/src/App'
@@ -40,25 +39,27 @@ export default defineEventHandler(async event => {
 
     const html = await renderHTML({ githubData, ...query })
 
-    const nodeHTMLToImageProp: Parameters<typeof nodeHtmlToImage>[0] = {
-      html,
-      transparent: true
-    }
-    if (!isDev) {
-      nodeHTMLToImageProp.puppeteerArgs = {
-        executablePath: '/usr/bin/google-chrome-stable'
-      }
-    }
+    const puppeteerArgs = isDev
+      ? {}
+      : { executablePath: '/usr/bin/google-chrome-stable' }
+    const browser = await launch(puppeteerArgs)
+    const page = await browser.newPage()
+    await page.setContent(html)
+    const bodyEl = await page.$('body')
+    const originalImage = await bodyEl.screenshot({
+      type: 'png',
+      omitBackground: true
+    })
 
-    const _image = await nodeHtmlToImage(nodeHTMLToImageProp)
-
-    const image = await sharp(Array.isArray(_image) ? _image[0] : _image)
+    const compressedImage = await sharp(
+      Array.isArray(originalImage) ? originalImage[0] : originalImage
+    )
       .png({ compressionLevel: 9 })
       .toBuffer()
 
     setResponseHeader(event, 'Content-Type', 'image/png')
 
-    return image
+    return compressedImage
   } catch (error) {
     logger.error(error)
     throw error
