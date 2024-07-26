@@ -1,8 +1,8 @@
 import sharp from 'sharp'
 import { z } from 'zod'
 import { launch } from 'puppeteer'
-import { getDaysOnGithub as uncachedGetDaysOnGithub } from '../../utils/getDaysOnGithub/getDaysOnGithub'
-import { renderHTML } from '../../utils/renderHTML'
+import { getDaysOnGithub as uncachedGetDaysOnGithub } from '../../../utils/getDaysOnGithub/getDaysOnGithub'
+import { renderHTML } from '../../../utils/renderHTML'
 import { Include, tailwindColors } from '~/src/App'
 import { logger } from '~/utils/logger'
 
