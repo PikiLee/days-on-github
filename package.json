@@ -17,7 +17,7 @@
     "build:css:watch": "tailwindcss -i ./src/index.css -o ./dist/output.css --minify --watch",
     "build:render:watch": "vite build --outDir dist/server --ssr src/render.tsx --watch",
     "package": "esno package.mts",
-    "dev:docker": "docker compose up server"
+    "dev:docker": "docker compose up server --build"
   },
   "dependencies": {
     "clsx": "^2.1.1",
