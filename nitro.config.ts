@@ -1,8 +1,8 @@
 // https://nitro.unjs.io/config
 export default defineNitroConfig({
   routeRules: {
-    '/*': {
-      redirect: '/v2/username/*'
+    '/username/**': {
+      redirect: '/v2/username/**'
     }
   }
 })
