@@ -12,10 +12,12 @@ ARG PNPM_VERSION=9.4.0
 # Use node image for base image for all stages.
 FROM ghcr.io/puppeteer/puppeteer:22.13.0 as base
 
+USER root
+
 # Set working directory for all build stages.
 WORKDIR /usr/src/app
 
-USER root
+RUN chown -R node:node /usr/src/app
 
 # Install pnpm.
 RUN --mount=type=cache,target=/root/.npm \
@@ -57,6 +59,9 @@ FROM base as final
 
 # Use production node environment by default.
 ENV NODE_ENV production
+
+RUN mkdir /var/log/server
+RUN chown -R node:node /var/log/server
 
 USER node
 
