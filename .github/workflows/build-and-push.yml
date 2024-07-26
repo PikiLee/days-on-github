@@ -46,8 +46,8 @@ jobs:
         with:
           url: 'http://localhost:3000/v2/username/PikiLee'
           responseCode: '200'
-          timeout: 2000
-          interval: 500
+          timeout: 8000
+          interval: 2000
 
       - name: Build and push
         uses: docker/build-push-action@v6
