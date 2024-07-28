@@ -8,7 +8,7 @@ An API endpoint that provides an image of a GitHub contribution graph.
 
 ## v2
 
-https://happy.apiki.me/v2/username/[username]
+`https://happy.apiki.me/v2/username/[username]`
 
 ### Search Params
 
@@ -40,7 +40,7 @@ https://happy.apiki.me/v2/username/[username]
 
 ##### example
 
-https://happy.apiki.me/v2/username/PikiLee?tone=yellow
+`https://happy.apiki.me/v2/username/PikiLee?tone=yellow`
 
 #### Include
 
@@ -52,15 +52,15 @@ https://happy.apiki.me/v2/username/PikiLee?tone=yellow
 
 ##### example
 
-https://happy.apiki.me/v2/username/PikiLee?include=name,avatar,daysOnGithubText
+`https://happy.apiki.me/v2/username/PikiLee?include=name,avatar,daysOnGithubText`
 
 ## v1
 
-https://happy.apiki.me/username/[username]
+`https://happy.apiki.me/username/[username]`
 
 ## Legacy
 
-https://days-on-github.vercel.app/username
+`https://days-on-github.vercel.app/[username]`
 
 # Features
 
