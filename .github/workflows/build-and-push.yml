@@ -4,6 +4,7 @@ on:
   push:
     branches-ignore:
       - 'renovate/**'
+      - 'main'
 
 env:
   TEST_TAG: ${{ vars.DOCKERHUB_USERNAME }}/days-on-github:test
