@@ -44,6 +44,14 @@ export default defineEventHandler(async event => {
       : { executablePath: '/usr/bin/google-chrome-stable' }
     const browser = await launch(puppeteerArgs)
     const page = await browser.newPage()
+
+    // Set a larger viewport and higher device scale factor
+    await page.setViewport({
+      width: 1920,
+      height: 1080,
+      deviceScaleFactor: 2 // Increase for higher pixel density
+    })
+
     await page.setContent(html)
     const bodyEl = await page.$('body')
     const originalImage = await bodyEl.screenshot({
