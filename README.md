@@ -1,17 +1,69 @@
 # Days on github
 
-Show how many days you have spend on Github in the last 365 days in your Github profile.
+An API endpoint that provides an image of a GitHub contribution graph.
 
-![example](https://happy.apiki.me/username/PikiLee)
+![example](https://happy.apiki.me/v2/username/PikiLee?tone=yellow&include=name,avatar,daysOnGithubText)
 
-# Usage
+# API
 
-Add `[](https://happy.apiki.me/username/[username])` to your profile repository's `README.md`
+## v2
+
+https://happy.apiki.me/v2/username/[username]
+
+### Search Params
+
+#### Tone
+
+##### options
+
+'slate',
+'zinc',
+'neutral',
+'stone',
+'red',
+'orange',
+'amber',
+'yellow',
+'lime',
+'green',
+'emerald',
+'teal',
+'cyan',
+'sky',
+'blue',
+'indigo',
+'violet',
+'purple',
+'fuchsia',
+'pink',
+'rose'
+
+##### example
+
+https://happy.apiki.me/v2/username/PikiLee?tone=yellow
+
+#### Include
+
+##### options
+
+'name',
+'avatar',
+'daysOnGithubText'
+
+##### example
+
+https://happy.apiki.me/v2/username/PikiLee?include=name,avatar,daysOnGithubText
+
+## v1
+
+https://happy.apiki.me/username/[username]
 
 ## Legacy
-Add `[](https://days-on-github.vercel.app/username)` to your profile repository's `README.md`
+
+https://days-on-github.vercel.app/username
 
 # Features
+
 1. Compile React app to html and then convert html to image.
 
 # Environment Variables
@@ -29,24 +81,29 @@ pnpm install
 ```
 
 ## Development
+
 Start the development server on <http://localhost:3000>
 
 ### Develop React App
+
 ```bash
 pnpm run dev:app
 ```
 
 ### Develop Nitro
+
 ```bash
 pnpm run dev
 ```
 
 ### Develop docker
+
 ```bash
 pnpm run dev:docker
 ```
 
 ## Production
+
 We use docker to deploy the application
 
 1. Set domain in 'user_conf.d/server.conf'
