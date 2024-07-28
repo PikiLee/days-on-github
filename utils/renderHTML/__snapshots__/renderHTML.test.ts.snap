@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderHTML > should render HTML with the provided Github data 1`] = `
+"<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Days on Github</title>
+    <style>body { background-color: white; }</style>
+  </head>
+  <body>
+    <div id="root"><div>Github Stats</div></div>
+    
+  </body>
+</html>
+"
+`;

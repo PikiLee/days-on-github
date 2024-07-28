@@ -1,5 +1,7 @@
 import { readFile } from 'fs/promises'
-import { render } from '~/dist/server/render.mjs'
+
+import { render } from '../../dist/server/render.mjs'
+import { AppProps } from '~/src/App'
 
 export interface GithubData {
   daysOnGithub: number
@@ -8,12 +10,15 @@ export interface GithubData {
     date?: string
     contributionCount?: number
   }[]
+  name: string
+  login: string
+  avatarUrl: string | null
 }
 
-export async function renderHTML(githubData: GithubData) {
+export async function renderHTML(props: AppProps) {
   const template = await readFile('./index.html', 'utf-8')
   const css = await readFile('./dist/output.css', 'utf-8')
-  const rendered = await render(githubData)
+  const rendered = await render(props)
 
   const html = template
     .replace('<script type="module" src="./src/main.tsx"></script>', '')

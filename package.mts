@@ -1,5 +1,5 @@
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 import AdmZip from 'adm-zip'
 import pc from 'picocolors'
 
@@ -33,7 +33,3 @@ filenames.forEach(filename => {
 // or write everything to disk
 console.log(pc.green(`Writing to: ${targetPath}`))
 zip.writeZip(targetPath)
-
-function consoleDivider() {
-  console.log(pc.gray('-----------------------------'))
-}

@@ -20,9 +20,11 @@ services:
     cap_add:
       - SYS_ADMIN
     container_name: days-on-github-server
+    volumes:
+      - ./logs/server:/var/log/server
   nginx:
     image: jonasal/nginx-certbot:latest
-    container_name: names-on-github-nginx
+    container_name: days-on-github-nginx
     restart: unless-stopped
     environment:
       - STAGING=1
@@ -33,7 +35,7 @@ services:
       - 80:80
       - 443:443
     volumes: # Storage can be either a
-      - ./nginx:/var/log/nginx
+      - ./logs/ngnix:/var/log/nginx
       - nginx_secrets:/etc/letsencrypt # Docker managed volume (see list at the bottom)
       - ./user_conf.d:/etc/nginx/user_conf.d # or a host mount with a relative or full path.
 

@@ -1,16 +1,15 @@
 {
   "root": true,
-  "extends": ["@nuxtjs/eslint-config-typescript"],
-  "plugins": ["prettier"],
+  "extends": ["@nuxtjs/eslint-config-typescript", "prettier"],
+  "plugins": ["prettier", "unused-imports"],
   "rules": {
+    "unused-imports/no-unused-vars": "error",
     "prettier/prettier": [
       "error",
       {},
       {
         "usePrettierrc": true
       }
-    ],
-    "space-before-function-paren": "off",
-    "arrow-parens": "off"
+    ]
   }
 }

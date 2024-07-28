@@ -1,6 +1,7 @@
 import { $fetch } from 'ofetch'
-import { describe, it, expect, vi } from 'vitest'
-import { mockGithubResponse } from '../mockData'
+import { describe, expect, it, vi } from 'vitest'
+
+import { mockGithubData, mockGithubResponse } from '../mockData'
 import { getDaysOnGithub } from './getDaysOnGithub'
 
 // Mocking the $fetch function
@@ -18,7 +19,7 @@ describe('getDaysOnGithub', () => {
 
     const result = await getDaysOnGithub(username)
 
-    expect(result).toMatchFileSnapshot('./getDaysOnGithub.snapshot')
+    expect(result).toEqual(mockGithubData)
   })
 
   it('should throw an error if NITRO_GITHUB_CLIENT_TOKEN is missing', async () => {

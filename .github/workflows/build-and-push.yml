@@ -44,7 +44,7 @@ jobs:
       - name: Wait for response
         uses: cygnetdigital/wait_for_response@v2.0.0
         with:
-          url: 'http://localhost:3000/username/PikiLee'
+          url: 'http://localhost:3000/v2/username/PikiLee'
           responseCode: '200'
           timeout: 2000
           interval: 500

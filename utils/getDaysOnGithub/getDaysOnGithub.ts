@@ -1,4 +1,5 @@
 import { $fetch } from 'ofetch'
+
 import type { GithubData } from '../renderHTML/renderHTML'
 
 export const getDaysOnGithub = async (
@@ -22,6 +23,9 @@ export const getDaysOnGithub = async (
             }[]
           }
         }
+        name: string
+        login: string
+        avatarUrl: string | null
       }
     }
   }>('https://api.github.com/graphql', {
@@ -43,6 +47,9 @@ export const getDaysOnGithub = async (
                         }
                       }
                     }
+                    name
+    								login
+                    avatarUrl
                   }
                 }
                 `,
@@ -52,7 +59,6 @@ export const getDaysOnGithub = async (
     }
   })
   const data = res.data
-  console.log('data', data)
 
   if (!data.user) {
     return null
@@ -75,6 +81,9 @@ export const getDaysOnGithub = async (
   return {
     daysOnGithub,
     percentageDaysOnGithub,
-    contributionDays
+    contributionDays,
+    name: data.user.name,
+    login: data.user.login,
+    avatarUrl: data.user.avatarUrl
   }
 }
