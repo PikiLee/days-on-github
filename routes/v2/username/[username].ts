@@ -47,8 +47,8 @@ export default defineEventHandler(async event => {
 
     // Set a larger viewport and higher device scale factor
     await page.setViewport({
-      width: 1920,
-      height: 1080,
+      width: 100,
+      height: 100,
       deviceScaleFactor: 2 // Increase for higher pixel density
     })
 
