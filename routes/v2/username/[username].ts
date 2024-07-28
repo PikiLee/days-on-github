@@ -58,6 +58,7 @@ export default defineEventHandler(async event => {
       type: 'png',
       omitBackground: true
     })
+    browser.close()
 
     const compressedImage = await sharp(
       Array.isArray(originalImage) ? originalImage[0] : originalImage
