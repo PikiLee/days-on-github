@@ -1,6 +1,8 @@
 # Days on github
 
-An API endpoint that provides an image of a GitHub contribution graph.
+An API endpoint that provides an image of a GitHub contribution graph in various colors.
+
+The graph is developed using React, converted to HTML, then transformed into an image, and served using Nitro.
 
 ![example](https://happy.apiki.me/v2/username/PikiLee?tone=yellow&include=name,avatar,daysOnGithubText)
 
@@ -13,6 +15,8 @@ An API endpoint that provides an image of a GitHub contribution graph.
 ### Search Params
 
 #### Tone
+
+Change the color of the GitHub contribution graph.
 
 ##### options
 
@@ -44,7 +48,9 @@ An API endpoint that provides an image of a GitHub contribution graph.
 
 #### Include
 
-##### options
+Show name, avatar, days-on-github text or all of them in the image.
+
+##### Options
 
 'name',
 'avatar',
@@ -52,6 +58,7 @@ An API endpoint that provides an image of a GitHub contribution graph.
 
 ##### example
 
+`https://happy.apiki.me/v2/username/PikiLee?include=name`
 `https://happy.apiki.me/v2/username/PikiLee?include=name,avatar,daysOnGithubText`
 
 ## v1
@@ -62,52 +69,44 @@ An API endpoint that provides an image of a GitHub contribution graph.
 
 `https://days-on-github.vercel.app/[username]`
 
-# Features
-
-1. Compile React app to html and then convert html to image.
-
 # Environment Variables
 
 1. `NITRO_GITHUB_CLIENT_TOKEN`: [github token](https://github.com/settings/tokens?type=beta)
 2. See .env.example for Certbot related Environment Variables
 
-## Setup
+# Development
 
-Make sure to install the dependencies:
+## Install dependencies:
 
 ```bash
-# pnpm
 pnpm install
 ```
 
-## Development
-
-Start the development server on <http://localhost:3000>
-
-### Develop React App
+## Develop React App
 
 ```bash
-pnpm run dev:app
+pnpm dev:app
 ```
 
-### Develop Nitro
+## Develop Nitro
 
 ```bash
-pnpm run dev
+pnpm dev
 ```
 
-### Develop docker
+## Develop docker
 
 ```bash
-pnpm run dev:docker
+pnpm dev:docker
 ```
 
 ## Production
 
 We use docker to deploy the application
 
-1. Set domain in 'user_conf.d/server.conf'
-2. Copy 'compose.yaml', 'compose.prod.yaml', '.env', 'user_conf.d' to the server and run the following command.
+1. Set domain in 'user_conf.d/server.conf'.
+2. Put `NITRO_GITHUB_CLIENT_TOKEN` in '.env' file.
+3. Copy 'compose.yaml', 'compose.prod.yaml', '.env', 'user_conf.d' to the server and run the following command.
 
 ```bash
 docker compose -f compose.yaml -f compose.prod.yaml up -d
