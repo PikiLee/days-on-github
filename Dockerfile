@@ -10,7 +10,7 @@ ARG PNPM_VERSION=9.4.0
 
 ################################################################################
 # Use node image for base image for all stages.
-FROM ghcr.io/puppeteer/puppeteer:22.13.0 as base
+FROM ghcr.io/puppeteer/puppeteer:22.15.0 as base
 
 USER root
 
