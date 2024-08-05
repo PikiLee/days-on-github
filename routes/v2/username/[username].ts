@@ -1,14 +1,24 @@
 import sharp from 'sharp'
 import { z } from 'zod'
-import { launch } from 'puppeteer'
+import puppeteer from 'puppeteer-core'
+import chromium from '@sparticuz/chromium-min'
 import { getDaysOnGithub as uncachedGetDaysOnGithub } from '../../../utils/getDaysOnGithub/getDaysOnGithub'
 import { renderHTML } from '../../../utils/renderHTML'
 import { Include, tailwindColors } from '~/src/App'
 import { logger } from '~/utils/logger'
-
 const getDaysOnGithub = cachedFunction(uncachedGetDaysOnGithub, {
   maxAge: 60 * 60 * 24 // 1 day
 })
+
+const localExecutablePath =
+  process.platform === 'win32'
+    ? 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+    : process.platform === 'linux'
+      ? '/usr/bin/google-chrome'
+      : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+
+const remoteExecutablePath =
+  'https://github.com/Sparticuz/chromium/releases/download/v126.0.0/chromium-v126.0.0-pack.tar'
 
 export default defineEventHandler(async event => {
   try {
@@ -39,10 +49,14 @@ export default defineEventHandler(async event => {
 
     const html = await renderHTML({ githubData, ...query })
 
-    const puppeteerArgs = isDev
-      ? {}
-      : { executablePath: '/usr/bin/google-chrome-stable' }
-    const browser = await launch(puppeteerArgs)
+    const browser = await puppeteer.launch({
+      args: isDev ? [] : chromium.args,
+      defaultViewport: { width: 1920, height: 1080 },
+      executablePath: isDev
+        ? localExecutablePath
+        : await chromium.executablePath(remoteExecutablePath),
+      headless: chromium.headless
+    })
     const page = await browser.newPage()
 
     // Set a larger viewport and higher device scale factor

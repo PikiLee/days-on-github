@@ -4,5 +4,8 @@ export default defineNitroConfig({
     '/username/**': {
       redirect: '/v2/username/**'
     }
+  },
+  rollupConfig: {
+    external: ['puppeteer-core', '@sparticuz/chromium']
   }
 })
