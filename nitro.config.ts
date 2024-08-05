@@ -8,7 +8,8 @@ export default defineNitroConfig({
   vercel: {
     functions: {
       '**': {
-        maxDuration: 60
+        maxDuration: 60,
+        includeFiles: ['./index.html', './dist/output.css']
       }
     }
   }
