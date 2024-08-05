@@ -5,9 +5,6 @@ export default defineNitroConfig({
       redirect: '/v2/username/**'
     }
   },
-  rollupConfig: {
-    external: ['puppeteer-core', '@sparticuz/chromium']
-  },
   vercel: {
     functions: {
       '**': {
