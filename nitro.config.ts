@@ -7,5 +7,12 @@ export default defineNitroConfig({
   },
   rollupConfig: {
     external: ['puppeteer-core', '@sparticuz/chromium']
+  },
+  vercel: {
+    functions: {
+      '**': {
+        maxDuration: 60
+      }
+    }
   }
 })
