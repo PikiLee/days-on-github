@@ -1,5 +1,6 @@
+// eslint-disable-next-line antfu/no-import-dist
 import { render } from '../../dist/server/render.mjs'
-import { AppProps } from '~/src/App'
+import type { AppProps } from '~/src/App'
 
 export interface GithubData {
   daysOnGithub: number
@@ -16,7 +17,7 @@ export interface GithubData {
 export async function renderHTML(
   props: AppProps,
   template: string,
-  css: string
+  css: string,
 ): Promise<string> {
   const rendered = await render(props)
 
@@ -24,7 +25,7 @@ export async function renderHTML(
     .replace('<script type="module" src="./src/main.tsx"></script>', '')
     .replace(
       '<link rel="stylesheet" href="./src/index.css" />',
-      `<style>${css}</style>`
+      `<style>${css}</style>`,
     )
     .replace('<!--app-html-->', rendered ?? '')
 

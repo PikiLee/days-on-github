@@ -1,10 +1,10 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { list } from '@vercel/blob'
 import isFileExist from './isFileExist' // Adjust the path accordingly
 
 // Mock the `head` function from '@vercel/blob'
 vi.mock('@vercel/blob', () => ({
-  list: vi.fn()
+  list: vi.fn(),
 }))
 
 describe('isFileExist', () => {
@@ -16,10 +16,10 @@ describe('isFileExist', () => {
           downloadUrl: 'downloadUrl',
           pathname: 'prefix/pathname',
           size: 100,
-          uploadedAt: new Date('2023-01-01T00:00:00.000Z')
-        }
+          uploadedAt: new Date('2023-01-01T00:00:00.000Z'),
+        },
       ],
-      hasMore: false
+      hasMore: false,
     }
     vi.mocked(list).mockResolvedValueOnce(mockBlobDetails)
 
@@ -30,7 +30,7 @@ describe('isFileExist', () => {
   it('should return false if the file does not exist', async () => {
     const mockBlobDetails: Awaited<ReturnType<typeof list<'expanded'>>> = {
       blobs: [],
-      hasMore: false
+      hasMore: false,
     }
     vi.mocked(list).mockResolvedValueOnce(mockBlobDetails)
 

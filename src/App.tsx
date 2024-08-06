@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-import { GithubData } from '../utils/renderHTML'
+import type { GithubData } from '../utils/renderHTML'
 import { getContributionLevel } from './utils/getContributionLevel/getContributionLevel'
 
 export const tailwindColors = [
@@ -25,7 +25,7 @@ export const tailwindColors = [
   'purple',
   'fuchsia',
   'pink',
-  'rose'
+  'rose',
 ] as const
 
 export type Tone = (typeof tailwindColors)[number]
@@ -38,7 +38,7 @@ const backgroundColorClasses = {
     'bg-neutral-300',
     'bg-neutral-400',
     'bg-neutral-500',
-    'bg-neutral-600'
+    'bg-neutral-600',
   ],
   stone: ['bg-stone-300', 'bg-stone-400', 'bg-stone-500', 'bg-stone-600'],
   red: ['bg-red-300', 'bg-red-400', 'bg-red-500', 'bg-red-600'],
@@ -51,7 +51,7 @@ const backgroundColorClasses = {
     'bg-emerald-300',
     'bg-emerald-400',
     'bg-emerald-500',
-    'bg-emerald-600'
+    'bg-emerald-600',
   ],
   teal: ['bg-teal-300', 'bg-teal-400', 'bg-teal-500', 'bg-teal-600'],
   cyan: ['bg-cyan-300', 'bg-cyan-400', 'bg-cyan-500', 'bg-cyan-600'],
@@ -64,10 +64,10 @@ const backgroundColorClasses = {
     'bg-fuchsia-300',
     'bg-fuchsia-400',
     'bg-fuchsia-500',
-    'bg-fuchsia-600'
+    'bg-fuchsia-600',
   ],
   pink: ['bg-pink-300', 'bg-pink-400', 'bg-pink-500', 'bg-pink-600'],
-  rose: ['bg-rose-300', 'bg-rose-400', 'bg-rose-500', 'bg-rose-600']
+  rose: ['bg-rose-300', 'bg-rose-400', 'bg-rose-500', 'bg-rose-600'],
 } satisfies Record<Tone, string[]>
 
 const textColorClasses = {
@@ -92,7 +92,7 @@ const textColorClasses = {
   purple: 'text-purple-500',
   fuchsia: 'text-fuchsia-500',
   pink: 'text-pink-500',
-  rose: 'text-rose-500'
+  rose: 'text-rose-500',
 }
 
 export const includeOptions = ['avatar', 'name', 'daysOnGithubText'] as const
@@ -105,6 +105,8 @@ export interface AppProps {
   tone?: Tone
 }
 
+const defaultInclude: Include[] = []
+
 export default function App({
   githubData: {
     daysOnGithub,
@@ -112,17 +114,17 @@ export default function App({
     contributionDays,
     name,
     login,
-    avatarUrl
+    avatarUrl,
   },
-  include = [],
-  tone = 'green'
+  include = defaultInclude,
+  tone = 'green',
 }: AppProps) {
   return (
     <div className="p-4 flex flex-col gap-2">
       <div
         className={clsx(
           'flex items-center justify-center gap-2',
-          textColorClasses[tone]
+          textColorClasses[tone],
         )}
       >
         {include.includes('avatar') && avatarUrl && (
@@ -135,7 +137,8 @@ export default function App({
         )}
         {include.includes('name') && (
           <div data-testid="name">
-            <span className="text-lg font-semibold">{name}</span>{' '}
+            <span className="text-lg font-semibold">{name}</span>
+            {' '}
             <span className="text-xs opacity-60">{login}</span>
           </div>
         )}
@@ -144,29 +147,32 @@ export default function App({
         <h1
           className={clsx(
             'text-lg font-bold text-center',
-            textColorClasses[tone]
+            textColorClasses[tone],
           )}
           data-testid="daysOnGithubText"
-        >{`Spent ${daysOnGithub} (${percentageDaysOnGithub}%) days on Github in last 365 days.`}</h1>
+        >
+          {`Spent ${daysOnGithub} (${percentageDaysOnGithub}%) days on Github in last 365 days.`}
+        </h1>
       )}
       <div className="grid grid-rows-7 grid-flow-col auto-cols-min gap-0.5">
         {contributionDays.map((day, index) => {
-          const backgroundColorClass =
-            day.contributionCount === 0
+          const backgroundColorClass
+            = day.contributionCount === 0
               ? 'bg-gray-200'
               : backgroundColorClasses[tone][
-                  getContributionLevel(day.contributionCount)
-                ]
+                getContributionLevel(day.contributionCount)
+              ]
           return (
             <div
               key={index}
               className={clsx(
                 'col-span-1 w-2 aspect-square rounded-[1px] border-gray-800/10 border-[0.8px]',
-                backgroundColorClass
+                backgroundColorClass,
               )}
               data-contribution-count={day.contributionCount}
               data-testid="grid-cell"
-            ></div>
+            >
+            </div>
           )
         })}
       </div>

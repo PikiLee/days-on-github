@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { del, list } from '@vercel/blob'
 import { logger } from '../logger'
 
@@ -12,10 +13,10 @@ export default async function removeObsoleteFiles(): Promise<{
       const {
         blobs,
         cursor: nextCursor,
-        hasMore: nextHasMore
+        hasMore: nextHasMore,
       } = await list({
         token: process.env.NITRO_BLOB_READ_WRITE_TOKEN,
-        cursor
+        cursor,
       })
       hasMore = nextHasMore
       cursor = nextCursor
@@ -34,15 +35,16 @@ export default async function removeObsoleteFiles(): Promise<{
     await Promise.all(
       files.map(file =>
         del(file.url, {
-          token: process.env.NITRO_BLOB_READ_WRITE_TOKEN
-        })
-      )
+          token: process.env.NITRO_BLOB_READ_WRITE_TOKEN,
+        }),
+      ),
     )
 
     return {
-      removedFiles: files.length
+      removedFiles: files.length,
     }
-  } catch (error) {
+  }
+  catch (error) {
     logger.error('Error removing obsolete files', error)
     throw new Error('Error removing obsolete files')
   }

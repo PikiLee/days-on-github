@@ -1,6 +1,9 @@
 {
   "private": true,
   "packageManager": "pnpm@9.6.0",
+  "engines": {
+    "node": ">=20.16.0"
+  },
   "scripts": {
     "prepare": "nitropack prepare",
     "dev": "run-p build:css:watch build:render:watch dev:nitro",
@@ -31,6 +34,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.24.1",
+    "@eslint-react/eslint-plugin": "^1.7.1",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
@@ -39,9 +44,12 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
-    "eslint": "8.57.0",
+    "eslint": "9.0.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-format": "^0.1.2",
     "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.9",
     "eslint-plugin-unused-imports": "^4.0.1",
     "jsdom": "^24.1.1",
     "npm-run-all2": "^6.2.2",
@@ -51,8 +59,5 @@
     "tailwindcss": "^3.4.7",
     "vite": "^5.3.5",
     "vitest": "^2.0.5"
-  },
-  "engines": {
-    "node": ">=20.16.0"
   }
 }

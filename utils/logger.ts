@@ -8,12 +8,12 @@ export const logger = createLogger({
     format.timestamp(),
     format.prettyPrint({
       depth: null,
-      colorize: true
-    })
+      colorize: true,
+    }),
   ),
   transports: [
     new transports.Console({
-      level: 'silly'
-    })
-  ]
+      level: 'silly',
+    }),
+  ],
 })
