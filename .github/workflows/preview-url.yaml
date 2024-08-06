@@ -7,17 +7,17 @@ on:
 jobs:
   capture_vercel_preview_url:
     name: Capture Vercel preview URL
-    runs-on: "ubuntu-latest"
+    runs-on: 'ubuntu-latest'
     steps:
       - uses: aaimio/vercel-preview-url-action@v2.2.0
         id: vercel_preview_url
         with:
-          GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.NITRO_GITHUB_CLIENT_TOKEN }}
       # Below is but an example of what you could do with the preview URL.
       # The preview URL is accessed through ${{ steps.<step_id>.outputs.vercel_preview_url }}
       - uses: actions/github-script@v7
         with:
-          github-token: ${{secrets.ACTION_GITHUB_TOKEN}}
+          github-token: ${{secrets.NITRO_GITHUB_CLIENT_TOKEN}}
           script: |
             const previewURL = "${{ steps.vercel_preview_url.outputs.vercel_preview_url }}".match(/https:\/\/vercel\.live\/open-feedback\/(.+.vercel.app).*/)[1];
             if (previewURL) {
@@ -25,7 +25,9 @@ jobs:
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: `The preview URL is: https://${previewURL}/PikiLee.`
+                body: `The preview URL are:
+                  1. https://${previewURL}/v2/username/PikiLee
+                  2. https://${previewURL}/v2/username/PikiLee?include=name,avatar,daysOnGithubText
+                  Please visit the URL to review the changes.`
               });
             }
-
