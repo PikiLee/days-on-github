@@ -1,34 +1,40 @@
 import { describe, it, expect, vi } from 'vitest'
-import { head } from '@vercel/blob'
+import { list } from '@vercel/blob'
 import isFileExist from './isFileExist' // Adjust the path accordingly
 
 // Mock the `head` function from '@vercel/blob'
 vi.mock('@vercel/blob', () => ({
-  head: vi.fn()
+  list: vi.fn()
 }))
 
 describe('isFileExist', () => {
   it('should return blob details if the file exists', async () => {
-    const mockBlobDetails: Awaited<ReturnType<typeof head>> = {
-      url: 'url',
-      downloadUrl: 'downloadUrl',
-      pathname: 'pathname',
-      contentType: 'text/plain',
-      contentDisposition: 'inline',
-      size: 100,
-      uploadedAt: new Date('2023-01-01T00:00:00.000Z'),
-      cacheControl: 'max-age=0'
+    const mockBlobDetails: Awaited<ReturnType<typeof list<'expanded'>>> = {
+      blobs: [
+        {
+          url: 'url',
+          downloadUrl: 'downloadUrl',
+          pathname: 'prefix/pathname',
+          size: 100,
+          uploadedAt: new Date('2023-01-01T00:00:00.000Z')
+        }
+      ],
+      hasMore: false
     }
-    vi.mocked(head).mockResolvedValueOnce(mockBlobDetails)
+    vi.mocked(list).mockResolvedValueOnce(mockBlobDetails)
 
-    const result = await isFileExist('existing-file.txt')
-    expect(result).toEqual(mockBlobDetails)
+    const result = await isFileExist('prefix', 'pathname')
+    expect(result).toEqual(mockBlobDetails.blobs[0])
   })
 
   it('should return false if the file does not exist', async () => {
-    vi.mocked(head).mockRejectedValueOnce(new Error('File not found'))
+    const mockBlobDetails: Awaited<ReturnType<typeof list<'expanded'>>> = {
+      blobs: [],
+      hasMore: false
+    }
+    vi.mocked(list).mockResolvedValueOnce(mockBlobDetails)
 
-    const result = await isFileExist('non-existing-file.txt')
+    const result = await isFileExist('prefix', 'non-existing-pathname')
     expect(result).toBe(false)
   })
 })
