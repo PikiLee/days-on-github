@@ -47,7 +47,7 @@ export default defineEventHandler(async event => {
     const existedFileDetails = await isFileExist(username, filename)
 
     const contentType = 'image/png'
-    setResponseHeader(event, 'Content-Type', contentType)
+    setResponseHeader(event, 'Cache-Control', 'public, max-age=86400') // 1 day
     if (existedFileDetails) {
       logger.info('file exists in storage')
       logger.debug('existedFileDetails', existedFileDetails)
