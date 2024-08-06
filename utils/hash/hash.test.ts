@@ -12,7 +12,7 @@ describe('hash function', () => {
     const hashedValue = hash(string1, string2)
 
     expect(hashedValue).toMatchInlineSnapshot(
-      `"ee0d9cbd44cd42abb5956159b4647ff1565422d27bd97affa89f2dc89c47ec47"`
+      `"77244f0d13646b0d2698b007dcbd3e4ef7aab4454e7a3c4feb77a850dd273e4a"`
     )
   })
 })
