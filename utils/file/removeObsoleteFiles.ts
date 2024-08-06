@@ -21,7 +21,7 @@ export default async function removeObsoleteFiles(): Promise<{
       cursor = nextCursor
       for (const blob of blobs) {
         const today = new Date()
-        today.setHours(0, 0, 0, 0)
+        today.setUTCHours(0, 0, 0, 0)
 
         if (new Date(blob.uploadedAt) < today) {
           files.push(blob)
