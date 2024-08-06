@@ -1,13 +1,9 @@
-import fsp from 'fs/promises'
 import { describe, expect, it, vi } from 'vitest'
 
 import { GithubData, renderHTML } from './renderHTML'
 
 vi.mock('fs/promises')
-
-vi.mocked(fsp.readFile)
-  .mockResolvedValueOnce(
-    `<!doctype html>
+const template = `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -21,8 +17,8 @@ vi.mocked(fsp.readFile)
   </body>
 </html>
 `
-  )
-  .mockResolvedValueOnce('body { background-color: white; }')
+
+const css = 'body { background-color: white; }'
 
 const mockRenderedContent = '<div>Github Stats</div>'
 vi.mock('../../dist/server/render.mjs', () => ({
@@ -33,7 +29,7 @@ describe('renderHTML', () => {
   it('should render HTML with the provided Github data', async () => {
     const githubData = {} as GithubData
 
-    const result = await renderHTML({ githubData })
+    const result = await renderHTML({ githubData }, template, css)
 
     expect(result).toMatchSnapshot()
   })

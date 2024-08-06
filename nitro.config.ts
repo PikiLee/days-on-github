@@ -1,3 +1,5 @@
+import importContents from 'rollup-plugin-import-contents'
+
 // https://nitro.unjs.io/config
 export default defineNitroConfig({
   routeRules: {
@@ -8,9 +10,18 @@ export default defineNitroConfig({
   vercel: {
     functions: {
       '**': {
-        maxDuration: 60,
-        includeFiles: ['./index.html', './dist/output.css']
+        maxDuration: 60
       }
     }
+  },
+  rollupConfig: {
+    plugins: [
+      importContents({
+        rules: [
+          { test: /\.css$/i, mode: 'plain' },
+          { test: /\.html$/i, mode: 'plain' }
+        ]
+      })
+    ]
   }
 })

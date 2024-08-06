@@ -1,6 +1,3 @@
-import { readFile } from 'fs/promises'
-
-import path from 'path'
 import { render } from '../../dist/server/render.mjs'
 import { AppProps } from '~/src/App'
 
@@ -16,15 +13,11 @@ export interface GithubData {
   avatarUrl: string | null
 }
 
-export async function renderHTML(props: AppProps) {
-  const template = await readFile(
-    path.join(process.cwd(), 'index.html'),
-    'utf-8'
-  )
-  const css = await readFile(
-    path.join(process.cwd(), './dist/output.css'),
-    'utf-8'
-  )
+export async function renderHTML(
+  props: AppProps,
+  template: string,
+  css: string
+): Promise<string> {
   const rendered = await render(props)
 
   const html = template

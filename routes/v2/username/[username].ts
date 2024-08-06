@@ -4,6 +4,8 @@ import puppeteer from 'puppeteer-core'
 import chromium from '@sparticuz/chromium-min'
 import { getDaysOnGithub as uncachedGetDaysOnGithub } from '../../../utils/getDaysOnGithub/getDaysOnGithub'
 import { renderHTML } from '../../../utils/renderHTML'
+import template from '../../../index.html'
+import css from '../../../dist/output.css'
 import { Include, tailwindColors } from '~/src/App'
 import { logger } from '~/utils/logger'
 const getDaysOnGithub = cachedFunction(uncachedGetDaysOnGithub, {
@@ -47,11 +49,10 @@ export default defineEventHandler(async event => {
       return 'Not Found'
     }
 
-    const html = await renderHTML({ githubData, ...query })
+    const html = await renderHTML({ githubData, ...query }, template, css)
 
     const browser = await puppeteer.launch({
       args: isDev ? [] : chromium.args,
-      defaultViewport: { width: 1920, height: 1080 },
       executablePath: isDev
         ? localExecutablePath
         : await chromium.executablePath(remoteExecutablePath),
