@@ -2,7 +2,7 @@ import sharp from 'sharp'
 import { z } from 'zod'
 import puppeteer from 'puppeteer-core'
 import chromium from '@sparticuz/chromium-min'
-import { getDaysOnGithub as uncachedGetDaysOnGithub } from '../../../utils/getDaysOnGithub/getDaysOnGithub'
+import { getDaysOnGithub } from '../../../utils/getDaysOnGithub/getDaysOnGithub'
 import { renderHTML } from '../../../utils/renderHTML'
 // @ts-ignore
 import template from '../../../index.html'
@@ -13,10 +13,6 @@ import { logger } from '~/utils/logger'
 import hash from '~/utils/hash/hash'
 import isFileExist from '~/utils/file/isFileExist'
 import uploadFile from '~/utils/file/uploadFile'
-
-const getDaysOnGithub = cachedFunction(uncachedGetDaysOnGithub, {
-  maxAge: 60 * 60 * 24 // 1 day
-})
 
 const localExecutablePath =
   process.platform === 'win32'
