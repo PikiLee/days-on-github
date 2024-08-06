@@ -4,7 +4,9 @@ import puppeteer from 'puppeteer-core'
 import chromium from '@sparticuz/chromium-min'
 import { getDaysOnGithub as uncachedGetDaysOnGithub } from '../../../utils/getDaysOnGithub/getDaysOnGithub'
 import { renderHTML } from '../../../utils/renderHTML'
+// @ts-ignore
 import template from '../../../index.html'
+// @ts-ignore
 import css from '../../../dist/output.css'
 import { Include, tailwindColors } from '~/src/App'
 import { logger } from '~/utils/logger'
