@@ -91,8 +91,8 @@ importers:
         specifier: ^24.1.1
         version: 24.1.1
       nitro-test-utils:
-        specifier: ^0.5.0
-        version: 0.5.0(nitropack@2.9.7)(vitest@1.6.0(@types/node@20.14.10)(jsdom@24.1.1)(less@4.2.0)(sass@1.77.8)(terser@5.31.2))
+        specifier: ^0.6.0
+        version: 0.6.0(nitropack@2.9.7)(vitest@1.6.0(@types/node@20.14.10)(jsdom@24.1.1)(less@4.2.0)(sass@1.77.8)(terser@5.31.2))
       npm-run-all2:
         specifier: ^6.2.2
         version: 6.2.2
@@ -3013,11 +3013,11 @@ packages:
     resolution: {integrity: sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==}
     engines: {node: '>= 0.4.0'}
 
-  nitro-test-utils@0.5.0:
-    resolution: {integrity: sha512-Udc3lWODvOuAIaU1b7a5qBvXtnph8CwiQQyICv+96s7zn7p+l+oHBw5qPOqg5a+w8SFnvffGJiufHOByk5jUwg==}
+  nitro-test-utils@0.6.0:
+    resolution: {integrity: sha512-gXPAGWzSKRMtS9uYPB3yWgzjbGJyNndGP4MdBuAn3T/PS+9KDQiqyszwXx+OQXD1GtnqDMdGYkTBAYXkwnrH3Q==}
     peerDependencies:
       nitropack: ^2
-      vitest: ^1
+      vitest: ^2
 
   nitropack@2.9.7:
     resolution: {integrity: sha512-aKXvtNrWkOCMsQbsk4A0qQdBjrJ1ZcvwlTQevI/LAgLWLYc5L7Q/YiYxGLal4ITyNSlzir1Cm1D2ZxnYhmpMEw==}
@@ -7473,7 +7473,7 @@ snapshots:
 
   netmask@2.0.2: {}
 
-  nitro-test-utils@0.5.0(nitropack@2.9.7)(vitest@1.6.0(@types/node@20.14.10)(jsdom@24.1.1)(less@4.2.0)(sass@1.77.8)(terser@5.31.2)):
+  nitro-test-utils@0.6.0(nitropack@2.9.7)(vitest@1.6.0(@types/node@20.14.10)(jsdom@24.1.1)(less@4.2.0)(sass@1.77.8)(terser@5.31.2)):
     dependencies:
       defu: 6.1.4
       dotenv: 16.4.5

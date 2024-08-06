@@ -50,7 +50,7 @@
     "eslint-plugin-unused-imports": "^3.2.0",
     "esno": "^4.7.0",
     "jsdom": "^24.1.1",
-    "nitro-test-utils": "^0.5.0",
+    "nitro-test-utils": "^0.6.0",
     "npm-run-all2": "^6.2.2",
     "picocolors": "^1.0.1",
     "postcss": "^8.4.39",
