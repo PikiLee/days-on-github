@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`App Component > renders the component with daysOnGithubText 1`] = `
+exports[`app Component > renders the component with daysOnGithubText 1`] = `
 <div>
   <div
     class="p-4 flex flex-col gap-2"
@@ -1851,7 +1851,7 @@ exports[`App Component > renders the component with daysOnGithubText 1`] = `
 </div>
 `;
 
-exports[`App Component > renders the component with daysOnGithubText 2`] = `
+exports[`app Component > renders the component with daysOnGithubText 2`] = `
 <div>
   <div
     class="p-4 flex flex-col gap-2"
@@ -3708,7 +3708,7 @@ exports[`App Component > renders the component with daysOnGithubText 2`] = `
 </div>
 `;
 
-exports[`App Component > renders the component with daysOnGithubText 3`] = `
+exports[`app Component > renders the component with daysOnGithubText 3`] = `
 <div>
   <div
     class="p-4 flex flex-col gap-2"
@@ -5555,7 +5555,7 @@ exports[`App Component > renders the component with daysOnGithubText 3`] = `
 </div>
 `;
 
-exports[`App Component > renders the component with default props 1`] = `
+exports[`app Component > renders the component with default props 1`] = `
 <div>
   <div
     class="p-4 flex flex-col gap-2"
