@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@sparticuz/chromium-min": "126",
+    "@vercel/blob": "^0.23.4",
     "clsx": "^2.1.1",
     "nitropack": "^2.9.7",
     "puppeteer-core": "22.13.1",
