@@ -1,11 +1,11 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { list } from '@vercel/blob'
 import removeObsoleteFiles from './removeObsoleteFiles'
 
 // Mock the dependencies
 vi.mock('@vercel/blob', () => ({
   del: vi.fn(),
-  list: vi.fn()
+  list: vi.fn(),
 }))
 
 describe('removeObsoleteFiles', () => {
@@ -20,21 +20,21 @@ describe('removeObsoleteFiles', () => {
         downloadUrl: 'downloadUrl',
         pathname: 'prefix/pathname',
         size: 100,
-        uploadedAt: new Date(Date.now() - 86400000)
+        uploadedAt: new Date(Date.now() - 86400000),
       }, // yesterday
       {
         url: 'file2',
         downloadUrl: 'downloadUrl',
         pathname: 'prefix/pathname',
         size: 100,
-        uploadedAt: new Date()
-      } // today
+        uploadedAt: new Date(),
+      }, // today
     ]
 
     vi.mocked(list).mockResolvedValueOnce({
       blobs: mockBlobs,
       cursor: null,
-      hasMore: false
+      hasMore: false,
     })
 
     const { removedFiles } = await removeObsoleteFiles()
@@ -46,7 +46,7 @@ describe('removeObsoleteFiles', () => {
     vi.mocked(list).mockRejectedValueOnce(new Error('Failed to list files'))
 
     await expect(removeObsoleteFiles()).rejects.toThrow(
-      'Error removing obsolete files'
+      'Error removing obsolete files',
     )
   })
 })

@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { GithubData, renderHTML } from './renderHTML'
+import type { GithubData } from './renderHTML'
+import { renderHTML } from './renderHTML'
 
 vi.mock('fs/promises')
 const template = `<!doctype html>
@@ -22,7 +23,7 @@ const css = 'body { background-color: white; }'
 
 const mockRenderedContent = '<div>Github Stats</div>'
 vi.mock('../../dist/server/render.mjs', () => ({
-  render: vi.fn(() => mockRenderedContent)
+  render: vi.fn(() => mockRenderedContent),
 }))
 
 describe('renderHTML', () => {

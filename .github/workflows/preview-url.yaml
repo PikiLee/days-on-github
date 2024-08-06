@@ -7,7 +7,7 @@ on:
 jobs:
   capture_vercel_preview_url:
     name: Capture Vercel preview URL
-    runs-on: 'ubuntu-latest'
+    runs-on: ubuntu-latest
     steps:
       - uses: aaimio/vercel-preview-url-action@v2.2.0
         id: vercel_preview_url

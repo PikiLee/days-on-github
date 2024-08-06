@@ -14,5 +14,5 @@ root.render(
         include={['daysOnGithubText', 'avatar', 'name']}
       />
     ))}
-  </>
+  </>,
 )

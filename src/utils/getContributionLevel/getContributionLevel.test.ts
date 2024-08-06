@@ -1,9 +1,9 @@
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 import { getContributionLevel } from './getContributionLevel'
 
 describe('getContributionLevel', () => {
-  test.each([
+  it.each([
     [0, 0],
     [5, 0],
     [9, 0],
@@ -16,11 +16,11 @@ describe('getContributionLevel', () => {
     [30, 3],
     [35, 3],
     [40, 3],
-    [100, 3]
+    [100, 3],
   ])(
     'for contribution count %i returns %i ',
     (contributionCount, expectedLevel) => {
       expect(getContributionLevel(contributionCount)).toBe(expectedLevel)
-    }
+    },
   )
 })

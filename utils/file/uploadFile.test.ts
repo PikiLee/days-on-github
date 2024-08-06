@@ -1,10 +1,11 @@
-import { describe, it, expect, vi } from 'vitest'
+import { Buffer } from 'node:buffer'
+import { describe, expect, it, vi } from 'vitest'
 import { put } from '@vercel/blob'
 import uploadFile from './uploadFile' // Adjust the path accordingly
 
 // Mock the `put` function from '@vercel/blob'
 vi.mock('@vercel/blob', () => ({
-  put: vi.fn()
+  put: vi.fn(),
 }))
 
 describe('uploadFile', () => {
@@ -14,7 +15,7 @@ describe('uploadFile', () => {
       downloadUrl: 'downloadUrl',
       pathname: 'pathname',
       contentType: 'text/plain',
-      contentDisposition: 'inline'
+      contentDisposition: 'inline',
     }
     vi.mocked(put).mockResolvedValueOnce(mockBlobDetails)
 
