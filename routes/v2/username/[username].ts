@@ -1,6 +1,6 @@
 import sharp from 'sharp'
 import { z } from 'zod'
-import puppeteer from 'puppeteer-core'
+import { launch } from 'puppeteer-core'
 import chromium from '@sparticuz/chromium-min'
 import { getDaysOnGithub } from '../../../utils/getDaysOnGithub/getDaysOnGithub'
 import { renderHTML } from '../../../utils/renderHTML'
@@ -65,7 +65,7 @@ export default defineEventHandler(async event => {
 
       const html = await renderHTML({ githubData, ...query }, template, css)
 
-      const browser = await puppeteer.launch({
+      const browser = await launch({
         args: isDev ? [] : chromium.args,
         executablePath: isDev
           ? localExecutablePath
