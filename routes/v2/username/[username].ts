@@ -49,8 +49,8 @@ export default defineEventHandler(async (event) => {
 
     // Do not use the cache if the request is from Vercel Preview for testing purposes
     const existedFileDetails = isVercelPreview
-      ? await isFileExist(username, filename)
-      : undefined
+      ? undefined
+      : await isFileExist(username, filename)
 
     const contentType = 'image/png'
     setResponseHeader(event, 'Cache-Control', 'public, max-age=86400') // 1 day
