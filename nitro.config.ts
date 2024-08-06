@@ -9,9 +9,7 @@ export default defineNitroConfig({
   },
   vercel: {
     functions: {
-      '**': {
-        maxDuration: 60
-      }
+      maxDuration: 60
     },
     config: {
       crons: [{ path: '/remove-obsolete-files', schedule: '0 1 * * *' }]
