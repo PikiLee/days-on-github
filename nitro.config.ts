@@ -12,6 +12,9 @@ export default defineNitroConfig({
       '**': {
         maxDuration: 60
       }
+    },
+    config: {
+      crons: [{ path: '/remove-obsolete-files', schedule: '0 1 * * *' }]
     }
   },
   rollupConfig: {
