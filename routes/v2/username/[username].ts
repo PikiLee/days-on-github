@@ -13,6 +13,7 @@ import { logger } from '~/utils/logger'
 import hash from '~/utils/hash/hash'
 import isFileExist from '~/utils/file/isFileExist'
 import uploadFile from '~/utils/file/uploadFile'
+import { isVercelPreview } from '~/utils/isDev'
 
 const localExecutablePath =
   process.platform === 'win32'
@@ -44,7 +45,11 @@ export default defineEventHandler(async event => {
 
     const filename = hash(JSON.stringify(query))
     logger.debug({ filename })
-    const existedFileDetails = await isFileExist(username, filename)
+
+    // Do not use the cache if the request is from Vercel Preview for testing purposes
+    const existedFileDetails = isVercelPreview
+      ? await isFileExist(username, filename)
+      : undefined
 
     const contentType = 'image/png'
     setResponseHeader(event, 'Cache-Control', 'public, max-age=86400') // 1 day
