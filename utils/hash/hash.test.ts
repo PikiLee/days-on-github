@@ -7,11 +7,12 @@ describe('hash function', () => {
     vi.useFakeTimers()
     vi.setSystemTime(new Date(2023, 0, 1))
 
-    const username = 'testuser'
-    const hashedValue = hash(username)
+    const string1 = 'testuser'
+    const string2 = 'password'
+    const hashedValue = hash(string1, string2)
 
     expect(hashedValue).toMatchInlineSnapshot(
-      `"7541c75c7dd9385ec66491543103a43bd13260ef002725b9d12a0e584545a955"`
+      `"ee0d9cbd44cd42abb5956159b4647ff1565422d27bd97affa89f2dc89c47ec47"`
     )
   })
 })
