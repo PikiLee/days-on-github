@@ -2,6 +2,7 @@ import sharp from 'sharp'
 import { z } from 'zod'
 import puppeteer from 'puppeteer-core'
 import chromium from '@sparticuz/chromium-min'
+import { head, put } from '@vercel/blob'
 import { getDaysOnGithub as uncachedGetDaysOnGithub } from '../../../utils/getDaysOnGithub/getDaysOnGithub'
 import { renderHTML } from '../../../utils/renderHTML'
 // @ts-ignore
@@ -10,6 +11,8 @@ import template from '../../../index.html'
 import css from '../../../dist/output.css'
 import { Include, tailwindColors } from '~/src/App'
 import { logger } from '~/utils/logger'
+import hash from '~/utils/hash/hash'
+
 const getDaysOnGithub = cachedFunction(uncachedGetDaysOnGithub, {
   maxAge: 60 * 60 * 24 // 1 day
 })
@@ -83,9 +86,22 @@ export default defineEventHandler(async event => {
       .png({ compressionLevel: 9 })
       .toBuffer()
 
-    setResponseHeader(event, 'Content-Type', 'image/png')
+    const filename = hash(username)
+    const contentType = 'image/png'
+    const blobDetails = await head('filename', {
+      token: process.env.NITRO_READ_WRITE_TOKEN
+    })
+    console.log({ blobDetails })
+    const blob = await put(filename, compressedImage, {
+      access: 'public',
+      token: process.env.NITRO_READ_WRITE_TOKEN,
+      contentType
+    })
+    console.log({ blob })
 
-    return compressedImage
+    setResponseHeader(event, 'Content-Type', contentType)
+
+    return sendRedirect(event, blob.url)
   } catch (error) {
     logger.error(error)
     throw error
