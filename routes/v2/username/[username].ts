@@ -108,6 +108,6 @@ export default defineEventHandler(async event => {
     }
   } catch (error) {
     logger.error(error)
-    throw error
+    throw new Error('Internal Server Error')
   }
 })
