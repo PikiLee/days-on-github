@@ -1,7 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
 import { mockGithubData } from '../mockData'
-import type { GithubData } from './renderHTML'
 import { renderHTML } from './renderHTML'
 
 vi.mock('fs/promises')
