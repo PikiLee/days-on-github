@@ -40,14 +40,17 @@ export async function GET(request: NextRequest, { params }: { params: { username
           .transform(v => (v ? (v.split(',') as Include[]) : undefined)),
       })
     const searchParams = request.nextUrl.searchParams
-    const query = querySchema.parse(searchParams)
+    const query = querySchema.parse({
+      tone: searchParams.get('tone') ?? undefined,
+      include: searchParams.get('include') ?? undefined,
+    })
     logger.info({ query })
 
     const filename = hash(JSON.stringify(query))
     logger.debug({ filename })
 
     // Do not use the cache if the request is from Vercel Preview for testing purposes
-    const existedFileDetails = isVercelPreview
+    const existedFileDetails = isVercelPreview || isDev
       ? undefined
       : await isFileExist(username, filename)
 
@@ -74,7 +77,7 @@ export async function GET(request: NextRequest, { params }: { params: { username
 
       const templatePath = path.join(process.cwd(), 'index.html')
       const template = fs.readFileSync(templatePath, 'utf-8')
-      const cssPath = path.join(process.cwd(), 'src/index.css')
+      const cssPath = path.join(process.cwd(), 'dist/output.css')
       const css = fs.readFileSync(cssPath, 'utf-8')
       const html = await renderHTML({ githubData, ...query }, template, css)
 
