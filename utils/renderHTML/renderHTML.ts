@@ -1,5 +1,5 @@
-import { render } from '../../src/render'
 import type { AppProps } from '~/src/App'
+import { render } from '~/dist/server/render.mjs'
 
 export interface GithubData {
   daysOnGithub: number

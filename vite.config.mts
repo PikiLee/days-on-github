@@ -8,4 +8,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './test.setup.js',
   },
+  ssr: {
+    noExternal: true,
+  },
 })
