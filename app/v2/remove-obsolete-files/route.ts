@@ -1,7 +1,7 @@
 import removeObsoleteFiles from '~/utils/file/removeObsoleteFiles'
 
-export default defineEventHandler(async () => {
+export async function DELETE() {
   await removeObsoleteFiles()
 
-  return 'ok'
-})
+  return new Response('ok')
+}

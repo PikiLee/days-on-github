@@ -1,21 +1,20 @@
 import process from 'node:process'
+import path from 'node:path'
+import fs from 'node:fs'
 import sharp from 'sharp'
 import { z } from 'zod'
 import { launch } from 'puppeteer-core'
 import chromium from '@sparticuz/chromium-min'
-import { getDaysOnGithub } from '../../../utils/getDaysOnGithub/getDaysOnGithub'
-import { renderHTML } from '../../../utils/renderHTML'
-// @ts-expect-error todo fix this
-import template from '../../../index.html'
-// eslint-disable-next-line antfu/no-import-dist
-import css from '../../../dist/output.css'
+import type { NextRequest } from 'next/server'
+import { getDaysOnGithub } from '../../../../utils/getDaysOnGithub/getDaysOnGithub'
+import { renderHTML } from '../../../../utils/renderHTML'
 import type { Include } from '~/src/App'
 import { tailwindColors } from '~/src/App'
 import { logger } from '~/utils/logger'
 import hash from '~/utils/hash/hash'
 import isFileExist from '~/utils/file/isFileExist'
 import uploadFile from '~/utils/file/uploadFile'
-import { isVercelPreview } from '~/utils/isDev'
+import { isDev, isVercelPreview } from '~/utils/isDev'
 
 const localExecutablePath
   = process.platform === 'win32'
@@ -27,21 +26,21 @@ const localExecutablePath
 const remoteExecutablePath
   = 'https://github.com/Sparticuz/chromium/releases/download/v126.0.0/chromium-v126.0.0-pack.tar'
 
-export default defineEventHandler(async (event) => {
+export async function GET(request: NextRequest, { params }: { params: { username: string } }) {
   try {
-    const username = getRouterParams(event).username
+    const username = params.username
     logger.info({ username })
 
-    const query = await getValidatedQuery(event, data =>
-      z
-        .object({
-          tone: z.enum(tailwindColors).optional(),
-          include: z
-            .string()
-            .optional()
-            .transform(v => (v ? (v.split(',') as Include[]) : undefined)),
-        })
-        .parse(data))
+    const querySchema = z
+      .object({
+        tone: z.enum(tailwindColors).optional(),
+        include: z
+          .string()
+          .optional()
+          .transform(v => (v ? (v.split(',') as Include[]) : undefined)),
+      })
+    const searchParams = request.nextUrl.searchParams
+    const query = querySchema.parse(searchParams)
     logger.info({ query })
 
     const filename = hash(JSON.stringify(query))
@@ -53,11 +52,12 @@ export default defineEventHandler(async (event) => {
       : await isFileExist(username, filename)
 
     const contentType = 'image/png'
-    setResponseHeader(event, 'Cache-Control', 'public, max-age=86400') // 1 day
+    const headers = new Headers()
+    headers.set('Cache-Control', 'public, max-age=86400') // 1 day
     if (existedFileDetails) {
       logger.info('file exists in storage')
       logger.debug('existedFileDetails', existedFileDetails)
-      return sendRedirect(event, existedFileDetails.url)
+      return Response.redirect(existedFileDetails.url)
     }
     else {
       logger.info('file does not exist in storage')
@@ -66,10 +66,16 @@ export default defineEventHandler(async (event) => {
         Object.assign({}, githubData, { contributionDays: 'Too long to show' }),
       )
       if (!githubData) {
-        setResponseStatus(event, 404, 'Not Found')
-        return 'Not Found'
+        return new Response('Not Found', {
+          status: 404,
+          headers,
+        })
       }
 
+      const templatePath = path.join(process.cwd(), 'index.html')
+      const template = fs.readFileSync(templatePath, 'utf-8')
+      const cssPath = path.join(process.cwd(), 'src/index.css')
+      const css = fs.readFileSync(cssPath, 'utf-8')
       const html = await renderHTML({ githubData, ...query }, template, css)
 
       const browser = await launch({
@@ -107,11 +113,13 @@ export default defineEventHandler(async (event) => {
         contentType,
       )
       logger.debug('uploadedFileDetails', uploadedFileDetails)
-      return sendRedirect(event, uploadedFileDetails.url)
+      return Response.redirect(uploadedFileDetails.url)
     }
   }
   catch (error) {
     logger.error(error)
     throw new Error('Internal Server Error')
   }
-})
+}
+
+export const maxDuration = 60
