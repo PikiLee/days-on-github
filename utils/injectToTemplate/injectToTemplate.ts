@@ -1,5 +1,5 @@
 // eslint-disable-next-line antfu/no-import-dist
-import { render } from '../../dist/server/render.mjs'
+import { renderGraphToHTML } from '../../dist/renderGraphToHTML.mjs'
 import type { GraphProps } from '~/graph/Graph'
 
 export interface GithubData {
@@ -19,7 +19,7 @@ export async function renderHTML(
   template: string,
   css: string,
 ): Promise<string> {
-  const rendered = await render(props)
+  const rendered = await renderGraphToHTML(props)
 
   const html = template
     .replace('<script type="module" src="./src/main.tsx"></script>', '')

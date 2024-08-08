@@ -19,12 +19,12 @@
     "test:once": "run-s build:graph vitest:once",
     "vitest:once": "vitest run",
     "dev:graph": "vite",
-    "build:graph": "pnpm run build:css && pnpm run build:render",
-    "build:graph:watch": "run-p build:css:watch build:render:watch",
+    "build:graph": "pnpm run build:css && pnpm run build:renderGraphToHTML",
+    "build:graph:watch": "run-p build:css:watch build:renderGraphToHTML:watch",
     "build:css": "tailwindcss -i ./graph/index.css -o ./dist/output.css --minify",
-    "build:render": "vite build --outDir dist/server --ssr graph/render.tsx",
+    "build:renderGraphToHTML": "vite build --outDir dist --ssr graph/renderGraphToHTML.tsx",
     "build:css:watch": "tailwindcss -i ./graph/index.css -o ./dist/output.css --minify --watch",
-    "build:render:watch": "vite build --outDir dist/server --ssr graph/render.tsx --watch"
+    "build:renderGraphToHTML:watch": "vite build --outDir dist --ssr graph/renderGraphToHTML.tsx --watch"
   },
   "dependencies": {
     "@sparticuz/chromium-min": "126",

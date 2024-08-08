@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 
 import { mockGithubData } from '../mockData'
-import { renderHTML } from './renderHTML'
+import { renderHTML } from './injectToTemplate'
 
 vi.mock('fs/promises')
 const template = `<!doctype html>

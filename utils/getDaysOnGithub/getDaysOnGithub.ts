@@ -1,7 +1,7 @@
 import process from 'node:process'
 import { $fetch } from 'ofetch'
 
-import type { GithubData } from '../renderHTML/renderHTML'
+import type { GithubData } from '../injectToTemplate/injectToTemplate'
 
 export async function getDaysOnGithub(username: string): Promise<GithubData | null> {
   const NITRO_GITHUB_CLIENT_TOKEN = process.env.NITRO_GITHUB_CLIENT_TOKEN
