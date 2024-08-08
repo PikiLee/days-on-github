@@ -1,0 +1,3 @@
+{
+  "crons": [{ "path": "/remove-obsolete-files", "schedule": "0 1 * * *" }]
+}

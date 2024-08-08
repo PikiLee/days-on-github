@@ -26,7 +26,7 @@ jobs:
                 repo: context.repo.repo,
                 body: `The preview URL are:
                   1. https://${previewURL}/v2/username/PikiLee
-                  2. https://${previewURL}/v2/username/PikiLee?include=name,avatar,daysOnGithubText
+                  2. https://${previewURL}/v2/username/PikiLee?tone=yellow&include=name,avatar,daysOnGithubText
                   Please visit the URL to review the changes.`
               });
             }

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import type { GithubData } from './renderHTML'
+import { mockGithubData } from '../mockData'
 import { renderHTML } from './renderHTML'
 
 vi.mock('fs/promises')
@@ -28,9 +28,7 @@ vi.mock('../../dist/server/render.mjs', () => ({
 
 describe('renderHTML', () => {
   it('should render HTML with the provided Github data', async () => {
-    const githubData = {} as GithubData
-
-    const result = await renderHTML({ githubData }, template, css)
+    const result = await renderHTML({ githubData: mockGithubData }, template, css)
 
     expect(result).toMatchSnapshot()
   })
