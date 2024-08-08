@@ -13,6 +13,7 @@
     "build:next": "next build",
     "preview": "node .output/server/index.mjs",
     "lint": "eslint . --fix",
+    "type-check": "tsc --noEmit",
     "test": "run-p build:app:watch vitest",
     "vitest": "vitest",
     "test:once": "run-s build:app vitest:once",
