@@ -6,7 +6,7 @@ import Graph, { includeOptions, tailwindColors } from './Graph'
 
 const daysOnGithubText = `Spent ${mockGithubData.daysOnGithub} (${mockGithubData.percentageDaysOnGithub}%) days on Github in last 365 days.`
 
-describe('app Component', () => {
+describe('component', () => {
   it('renders the component with default props', () => {
     const { container } = render(<Graph githubData={mockGithubData} />)
 

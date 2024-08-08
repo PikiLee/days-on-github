@@ -9,22 +9,18 @@
   "scripts": {
     "dev": "run-p build:graph:watch dev:next",
     "build": "run-s build:graph build:next",
-    "dev:next": "next dev",
-    "build:next": "next build",
-    "preview": "node .output/server/index.mjs",
+    "preview": "pnpm start",
     "lint": "eslint . --fix",
     "type-check": "tsc --noEmit",
     "test": "run-p build:graph:watch vitest",
-    "vitest": "vitest",
     "test:once": "run-s build:graph vitest:once",
+    "vitest": "vitest",
     "vitest:once": "vitest run",
+    "dev:next": "next dev",
+    "build:next": "next build",
     "dev:graph": "vite",
-    "build:graph": "pnpm run build:css && pnpm run build:renderGraphToHTML",
-    "build:graph:watch": "run-p build:css:watch build:renderGraphToHTML:watch",
-    "build:css": "tailwindcss -i ./graph/index.css -o ./dist/output.css --minify",
-    "build:renderGraphToHTML": "vite build --outDir dist --ssr graph/renderGraphToHTML.tsx",
-    "build:css:watch": "tailwindcss -i ./graph/index.css -o ./dist/output.css --minify --watch",
-    "build:renderGraphToHTML:watch": "vite build --outDir dist --ssr graph/renderGraphToHTML.tsx --watch"
+    "build:graph": "vite build",
+    "build:graph:watch": "vite build --watch"
   },
   "dependencies": {
     "@sparticuz/chromium-min": "126",

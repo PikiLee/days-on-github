@@ -2,6 +2,7 @@ import clsx from 'clsx'
 
 import type { GithubData } from '../utils/injectToTemplate/injectToTemplate'
 import { getContributionLevel } from './utils/getContributionLevel/getContributionLevel'
+import './index.css'
 
 export const tailwindColors = [
   'slate',
