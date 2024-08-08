@@ -1,6 +1,6 @@
 // eslint-disable-next-line antfu/no-import-dist
 import { render } from '../../dist/server/render.mjs'
-import type { AppProps } from '~/src/App'
+import type { GraphProps } from '~/graph/Graph'
 
 export interface GithubData {
   daysOnGithub: number
@@ -15,7 +15,7 @@ export interface GithubData {
 }
 
 export async function renderHTML(
-  props: AppProps,
+  props: GraphProps,
   template: string,
   css: string,
 ): Promise<string> {

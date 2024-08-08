@@ -2,13 +2,13 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
 import { mockGithubData } from '../utils/mockData'
-import App, { includeOptions, tailwindColors } from './App'
+import Graph, { includeOptions, tailwindColors } from './Graph'
 
 const daysOnGithubText = `Spent ${mockGithubData.daysOnGithub} (${mockGithubData.percentageDaysOnGithub}%) days on Github in last 365 days.`
 
 describe('app Component', () => {
   it('renders the component with default props', () => {
-    const { container } = render(<App githubData={mockGithubData} />)
+    const { container } = render(<Graph githubData={mockGithubData} />)
 
     expect(screen.queryByText(daysOnGithubText)).not.toBeInTheDocument()
     expect(screen.queryByText(mockGithubData.name)).not.toBeInTheDocument()
@@ -24,7 +24,7 @@ describe('app Component', () => {
     'renders the component with daysOnGithubText',
     (includeOption) => {
       const { container } = render(
-        <App githubData={mockGithubData} include={[includeOption]} />,
+        <Graph githubData={mockGithubData} include={[includeOption]} />,
       )
 
       expect(screen.getByTestId(includeOption)).toBeInTheDocument()
@@ -35,7 +35,7 @@ describe('app Component', () => {
   it.each(tailwindColors)(
     'applies the correct background color classes based on tone and contribution level',
     (tone) => {
-      render(<App githubData={mockGithubData} tone={tone} />)
+      render(<Graph githubData={mockGithubData} tone={tone} />)
 
       const gridCells = screen.getAllByTestId('grid-cell')
       gridCells.forEach((cell) => {
@@ -48,7 +48,7 @@ describe('app Component', () => {
     'applies the correct text color class based on tone',
     (tone) => {
       render(
-        <App
+        <Graph
           githubData={mockGithubData}
           tone={tone}
           include={['daysOnGithubText']}

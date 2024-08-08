@@ -1,13 +1,13 @@
 import { createRoot } from 'react-dom/client'
 
 import { mockGithubData } from '../utils/mockData'
-import App, { tailwindColors } from './App'
+import Graph, { tailwindColors } from './Graph'
 
 const root = createRoot(document.getElementById('root'))
 root.render(
   <>
     {tailwindColors.map(tone => (
-      <App
+      <Graph
         githubData={mockGithubData}
         tone={tone}
         key={tone}
