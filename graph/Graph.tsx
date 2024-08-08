@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-import type { GithubData } from '../utils/renderHTML'
+import type { GithubData } from '../utils/renderHTML/renderHTML'
 import { getContributionLevel } from './utils/getContributionLevel/getContributionLevel'
 
 export const tailwindColors = [
