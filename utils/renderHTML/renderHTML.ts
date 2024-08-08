@@ -1,3 +1,4 @@
+// eslint-disable-next-line antfu/no-import-dist
 import { render } from '../../dist/server/render.mjs'
 import type { AppProps } from '~/src/App'
 
