@@ -1,7 +1,8 @@
 import clsx from 'clsx'
 
-import type { GithubData } from '../utils/renderHTML'
+import type { GithubData } from '../utils/injectToTemplate/injectToTemplate'
 import { getContributionLevel } from './utils/getContributionLevel/getContributionLevel'
+import './index.css'
 
 export const tailwindColors = [
   'slate',
@@ -99,7 +100,7 @@ export const includeOptions = ['avatar', 'name', 'daysOnGithubText'] as const
 
 export type Include = (typeof includeOptions)[number]
 
-export interface AppProps {
+export interface GraphProps {
   githubData: GithubData
   include?: Include[]
   tone?: Tone
@@ -107,7 +108,7 @@ export interface AppProps {
 
 const defaultInclude: Include[] = []
 
-export default function App({
+export default function Graph({
   githubData: {
     daysOnGithub,
     percentageDaysOnGithub,
@@ -118,7 +119,7 @@ export default function App({
   },
   include = defaultInclude,
   tone = 'green',
-}: AppProps) {
+}: GraphProps) {
   return (
     <div className="p-4 flex flex-col gap-2">
       <div

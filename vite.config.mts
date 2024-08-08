@@ -9,4 +9,14 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './test.setup.ts',
   },
+  build: {
+    outDir: 'dist',
+    ssr: 'graph/renderGraphToHTML.tsx',
+    rollupOptions: {
+      output: {
+        assetFileNames: '[name][extname]',
+      },
+    },
+    ssrEmitAssets: true,
+  },
 })
