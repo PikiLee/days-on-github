@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
@@ -8,7 +9,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './test.setup.js',
   },
-  ssr: {
-    noExternal: true,
-  },
+  // ssr: {
+  //   noExternal: true,
+  // },
 })
