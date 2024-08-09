@@ -1,5 +1,5 @@
 import { Analytics } from '@vercel/analytics/react'
-import '../src/index.css'
+import '../index.css'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

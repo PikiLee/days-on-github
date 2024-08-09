@@ -2,6 +2,6 @@
 module.exports = {
   content: {
     relative: true,
-    files: ['./{app,components}/**/*.{js,jsx,ts,tsx}'],
+    files: ['./**/*.{js,jsx,ts,tsx}'],
   },
 }
