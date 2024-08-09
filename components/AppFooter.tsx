@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FaGithub } from 'react-icons/fa'
+import { IoLogoGithub } from 'react-icons/io5'
 
 export default function AppFooter() {
   return (
@@ -16,7 +16,7 @@ export default function AppFooter() {
 
         <div className="mt-3 space-x-2">
           <Link className="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-500 hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" target="_blank" href="https://github.com/PikiLee">
-            <FaGithub />
+            <IoLogoGithub />
           </Link>
         </div>
 

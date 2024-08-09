@@ -2,8 +2,7 @@
 
 import Link from 'next/link'
 import { LuSquareStack } from 'react-icons/lu'
-import { FaGithub } from 'react-icons/fa'
-import { RxHamburgerMenu } from 'react-icons/rx'
+import { IoLogoGithub, IoMenuOutline } from 'react-icons/io5'
 import { useState } from 'react'
 import clsx from 'clsx'
 
@@ -23,7 +22,7 @@ export default function AppHeader() {
 
           <div className="md:hidden">
             <button type="button" className="flex justify-center items-center size-6 border border-gray-200 text-gray-500 rounded-full hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" aria-expanded="false" aria-label="Toggle navigation" onClick={() => setNavOpen(prev => !prev)}>
-              <RxHamburgerMenu />
+              <IoMenuOutline />
             </button>
           </div>
         </div>
@@ -33,7 +32,7 @@ export default function AppHeader() {
             <Link className="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-gray-800 font-medium text-gray-800 focus:outline-none dark:border-neutral-200 dark:text-neutral-200" href="/" aria-current="page">Home</Link>
           </div>
           <div className="before:block before:absolute before:top-1/2 before:-start-px before:w-px before:h-4 before:bg-gray-300 before:-translate-y-1/2 dark:before:bg-neutral-700 flex max-md:justify-center max-md:mt-4 items-center relative pl-4">
-            <Link href="https://github.com/PikiLee/days-on-github" target="_blank"><FaGithub size={18} /></Link>
+            <Link href="https://github.com/PikiLee/days-on-github" target="_blank"><IoLogoGithub size={18} /></Link>
           </div>
         </div>
       </nav>
