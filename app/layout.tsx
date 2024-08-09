@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/react'
 import '../index.css'
 import AppHeader from '~/components/AppHeader'
+import AppFooter from '~/components/AppFooter'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,6 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Analytics />
         <AppHeader />
         <main>{children}</main>
+        <AppFooter />
       </body>
     </html>
   )
