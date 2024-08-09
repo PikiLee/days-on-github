@@ -63,8 +63,8 @@ Show name, avatar, days-on-github text or all of them in the image.
 
 # Environment Variables
 
-1. `NITRO_GITHUB_CLIENT_TOKEN`: [github token](https://github.com/settings/tokens?type=beta)
-2. `NITRO_BLOB_READ_WRITE_TOKEN`: [vercel blob read-write token](https://vercel.com/docs/storage/vercel-blob/using-blob-sdk#read-write-token)
+1. `GITHUB_CLIENT_TOKEN`: [github token](https://github.com/settings/tokens?type=beta)
+2. `BLOB_READ_WRITE_TOKEN`: [vercel blob read-write token](https://vercel.com/docs/storage/vercel-blob/using-blob-sdk#read-write-token)
 
 # Development
 

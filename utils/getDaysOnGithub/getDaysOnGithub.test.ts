@@ -15,7 +15,7 @@ vi.mocked($fetch).mockResolvedValue(mockGithubResponse)
 
 describe('getDaysOnGithub', () => {
   it('should fetch GitHub data and return formatted data', async () => {
-    vi.stubEnv('NITRO_GITHUB_CLIENT_TOKEN', 'Token')
+    vi.stubEnv('GITHUB_CLIENT_TOKEN', 'Token')
     const username = 'testuser'
 
     const result = await getDaysOnGithub(username)
@@ -23,10 +23,10 @@ describe('getDaysOnGithub', () => {
     expect(result).toEqual(mockGithubData)
   })
 
-  it('should throw an error if NITRO_GITHUB_CLIENT_TOKEN is missing', async () => {
-    delete process.env.NITRO_GITHUB_CLIENT_TOKEN
+  it('should throw an error if GITHUB_CLIENT_TOKEN is missing', async () => {
+    delete process.env.GITHUB_CLIENT_TOKEN
     await expect(getDaysOnGithub('testuser')).rejects.toThrow(
-      'Missing NITRO_GITHUB_CLIENT_TOKEN environment variable',
+      'Missing GITHUB_CLIENT_TOKEN environment variable',
     )
   })
 
@@ -37,7 +37,7 @@ describe('getDaysOnGithub', () => {
       },
     })
 
-    vi.stubEnv('NITRO_GITHUB_CLIENT_TOKEN', 'Token')
+    vi.stubEnv('GITHUB_CLIENT_TOKEN', 'Token')
 
     const result = await getDaysOnGithub('testuser')
 

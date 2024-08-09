@@ -9,7 +9,7 @@ export default async function uploadFile(
 ): Promise<ReturnType<typeof put>> {
   const blob = await put(filename, data, {
     access: 'public',
-    token: process.env.NITRO_BLOB_READ_WRITE_TOKEN,
+    token: process.env.BLOB_READ_WRITE_TOKEN,
     contentType,
     cacheControlMaxAge: 60 * 60 * 24, // 1 day
   })

@@ -4,9 +4,9 @@ import { $fetch } from 'ofetch'
 import type { GithubData } from '../injectToTemplate/injectToTemplate'
 
 export async function getDaysOnGithub(username: string): Promise<GithubData | null> {
-  const NITRO_GITHUB_CLIENT_TOKEN = process.env.NITRO_GITHUB_CLIENT_TOKEN
-  if (!NITRO_GITHUB_CLIENT_TOKEN) {
-    throw new Error('Missing NITRO_GITHUB_CLIENT_TOKEN environment variable')
+  const GITHUB_CLIENT_TOKEN = process.env.GITHUB_CLIENT_TOKEN
+  if (!GITHUB_CLIENT_TOKEN) {
+    throw new Error('Missing GITHUB_CLIENT_TOKEN environment variable')
   }
 
   const res = await $fetch<{
@@ -30,7 +30,7 @@ export async function getDaysOnGithub(username: string): Promise<GithubData | nu
   }>('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
-      Authorization: `bearer ${NITRO_GITHUB_CLIENT_TOKEN}`,
+      Authorization: `bearer ${GITHUB_CLIENT_TOKEN}`,
     },
     body: {
       query: `

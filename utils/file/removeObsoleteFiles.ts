@@ -15,7 +15,7 @@ export default async function removeObsoleteFiles(): Promise<{
         cursor: nextCursor,
         hasMore: nextHasMore,
       } = await list({
-        token: process.env.NITRO_BLOB_READ_WRITE_TOKEN,
+        token: process.env.BLOB_READ_WRITE_TOKEN,
         cursor,
       })
       hasMore = nextHasMore
@@ -35,7 +35,7 @@ export default async function removeObsoleteFiles(): Promise<{
     await Promise.all(
       files.map(file =>
         del(file.url, {
-          token: process.env.NITRO_BLOB_READ_WRITE_TOKEN,
+          token: process.env.BLOB_READ_WRITE_TOKEN,
         }),
       ),
     )
