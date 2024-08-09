@@ -68,16 +68,16 @@ Show name, avatar, days-on-github text or all of them in the image.
 
 # Development
 
-## Install dependencies:
+## Install Dependencies:
 
 ```bash
 pnpm install
 ```
 
-## Develop React App
+## Develop Graph
 
 ```bash
-pnpm dev:app
+pnpm dev:graph
 ```
 
 ## Develop Next js
