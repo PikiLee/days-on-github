@@ -5,7 +5,7 @@ import ExampleSky from '~/assets/example-sky.png'
 
 export default function HomeHero() {
   return (
-    <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 h-screen flex justify-center">
+    <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-36">
       <div className="grid md:grid-cols-2 gap-8 xl:gap-20 md:items-center">
         <div className="max-md:self-end">
           <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight">
