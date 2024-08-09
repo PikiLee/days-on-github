@@ -3,7 +3,7 @@ import ExampleYellow from '~/assets/example-yellow.png'
 import ExampleGreen from '~/assets/example-green.png'
 import ExampleSky from '~/assets/example-sky.png'
 
-export default function Hero() {
+export default function HomeHero() {
   return (
     <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 h-screen flex justify-center">
       <div className="grid md:grid-cols-2 gap-8 xl:gap-20 md:items-center">

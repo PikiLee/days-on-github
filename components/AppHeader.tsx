@@ -7,7 +7,7 @@ import { RxHamburgerMenu } from 'react-icons/rx'
 import { useState } from 'react'
 import clsx from 'clsx'
 
-export default function Header() {
+export default function AppHeader() {
   const [navOpen, setNavOpen] = useState(false)
 
   return (

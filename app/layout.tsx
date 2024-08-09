@@ -1,13 +1,13 @@
 import { Analytics } from '@vercel/analytics/react'
 import '../index.css'
-import Header from '~/components/Header'
+import AppHeader from '~/components/AppHeader'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <body>
         <Analytics />
-        <Header />
+        <AppHeader />
         <main>{children}</main>
       </body>
     </html>
