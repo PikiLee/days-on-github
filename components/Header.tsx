@@ -5,6 +5,7 @@ import { LuSquareStack } from 'react-icons/lu'
 import { FaGithub } from 'react-icons/fa'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import { useState } from 'react'
+import clsx from 'clsx'
 
 export default function Header() {
   const [navOpen, setNavOpen] = useState(false)
@@ -27,16 +28,14 @@ export default function Header() {
           </div>
         </div>
 
-        {navOpen && (
-          <div className="overflow-hidden transition-all duration-300 basis-full grow md:flex md:justify-end md:gap-4">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-end gap-2 md:gap-3 mt-3 md:mt-0 py-2 md:py-0 md:ps-7">
-              <Link className="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-gray-800 font-medium text-gray-800 focus:outline-none dark:border-neutral-200 dark:text-neutral-200" href="/" aria-current="page">Home</Link>
-            </div>
-            <div className="before:block before:absolute before:top-1/2 before:-start-px before:w-px before:h-4 before:bg-gray-300 before:-translate-y-1/2 dark:before:bg-neutral-700 flex max-md:justify-center max-md:mt-4 items-center relative pl-4">
-              <Link href="https://github.com/PikiLee/days-on-github" target="_blank"><FaGithub size={18} /></Link>
-            </div>
+        <div className={clsx('overflow-hidden transition-all duration-300 basis-full grow md:flex md:justify-end md:gap-4', navOpen ? 'block' : 'hidden')}>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-end gap-2 md:gap-3 mt-3 md:mt-0 py-2 md:py-0 md:ps-7">
+            <Link className="py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-gray-800 font-medium text-gray-800 focus:outline-none dark:border-neutral-200 dark:text-neutral-200" href="/" aria-current="page">Home</Link>
           </div>
-        )}
+          <div className="before:block before:absolute before:top-1/2 before:-start-px before:w-px before:h-4 before:bg-gray-300 before:-translate-y-1/2 dark:before:bg-neutral-700 flex max-md:justify-center max-md:mt-4 items-center relative pl-4">
+            <Link href="https://github.com/PikiLee/days-on-github" target="_blank"><FaGithub size={18} /></Link>
+          </div>
+        </div>
       </nav>
     </header>
 
