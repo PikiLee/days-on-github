@@ -10,6 +10,7 @@ export default async function uploadFile(
   const blob = await put(filename, data, {
     access: 'public',
     token: process.env.BLOB_READ_WRITE_TOKEN,
+    addRandomSuffix: false,
     contentType,
     cacheControlMaxAge: 60 * 60 * 24, // 1 day
   })
