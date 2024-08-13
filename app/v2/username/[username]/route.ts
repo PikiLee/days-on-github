@@ -9,12 +9,12 @@ import type { NextRequest } from 'next/server'
 import { getDaysOnGithub } from '../../../../utils/getDaysOnGithub/getDaysOnGithub'
 import { renderHTML } from '../../../../utils/injectToTemplate/injectToTemplate'
 import type { Include } from '~/graph/Graph'
-import { tailwindColors } from '~/graph/Graph'
 import { logger } from '~/utils/logger'
 import hash from '~/utils/hash/hash'
 import isFileExist from '~/utils/file/isFileExist'
 import uploadFile from '~/utils/file/uploadFile'
 import { isDev, isVercelPreview } from '~/utils/isDev'
+import { tailwindColors } from '~/utils/colors'
 
 const localExecutablePath
   = process.platform === 'win32'

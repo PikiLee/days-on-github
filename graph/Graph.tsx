@@ -1,9 +1,9 @@
 import clsx from 'clsx'
 
 import type { GithubData } from '../utils/injectToTemplate/injectToTemplate'
+import { type Tone, backgroundColorClasses, textColorClasses } from '../utils/colors'
 import { getContributionLevel } from './utils/getContributionLevel/getContributionLevel'
 import './index.css'
-import { type Tone, backgroundColorClasses, textColorClasses } from '~/utils/colors'
 
 export const includeOptions = ['avatar', 'name', 'daysOnGithubText'] as const
 
