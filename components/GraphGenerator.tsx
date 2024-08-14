@@ -20,8 +20,11 @@ interface Form {
 export default function GraphGenerator() {
   const { register, handleSubmit, control, formState: { errors } } = useForm<Form>()
   const [imageURL, setImageURL] = useState<string>(new URL(`/v2/username/PikiLee`, window.location.origin).toString())
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const onSubmit = async (data: Form) => {
+    setIsLoading(true)
+
     const url = new URL(`/v2/username/${data.username}`, window.location.origin)
     const include = []
     if (data.includeDaysOnGithubText)
@@ -67,7 +70,7 @@ export default function GraphGenerator() {
                 </div>
                 <div className="flex gap-2">
                   <Tooltip content="Generate">
-                    <AppButton type="submit"><LuImagePlus size={24} /></AppButton>
+                    <AppButton type="submit" isLoading={isLoading}><LuImagePlus size={24} /></AppButton>
                   </Tooltip>
                 </div>
               </div>
@@ -104,7 +107,7 @@ export default function GraphGenerator() {
           </div>
 
           <div className="flex justify-center mt-3">
-            <Image src={imageURL} alt="" />
+            <Image src={imageURL} alt="" onLoad={() => setIsLoading(false)} onError={() => setIsLoading(false)} />
           </div>
         </div>
       </div>
