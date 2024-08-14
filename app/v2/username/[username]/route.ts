@@ -45,7 +45,7 @@ export async function GET(request: NextRequest, { params }: { params: { username
   })
   logger.info({ query })
 
-  const filename = hash(JSON.stringify(query))
+  const filename = `${hash(JSON.stringify(query))}.png`
   logger.debug({ filename })
 
   // Do not use the cache if the request is from Vercel Preview for testing purposes
