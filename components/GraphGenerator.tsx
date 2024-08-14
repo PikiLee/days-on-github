@@ -1,7 +1,10 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-import { IoSearch } from 'react-icons/io5'
+import { $fetch } from 'ofetch'
+import { useMutation } from '@tanstack/react-query'
+import { Button, Image, Spinner } from '@nextui-org/react'
+import { LuImagePlus } from 'react-icons/lu'
 import AppCheckBox from './AppCheckBox'
 import GraphColorSelector from './GraphColorSelector'
 import type { Tone } from '~/utils/colors'
@@ -16,9 +19,27 @@ interface Form {
 
 export default function GraphGenerator() {
   const { register, handleSubmit, control, formState: { errors } } = useForm<Form>()
+  const { isPending, data: imageBlob, isError, mutate } = useMutation({
+    mutationFn: (formData: Form) => {
+      const include = []
+      if (formData.includeDaysOnGithubText)
+        include.push('daysOnGithubText')
+      if (formData.includeName)
+        include.push('name')
+      if (formData.includeAvatar)
+        include.push('avatar')
 
-  const onSubmit = (data: Form) => {
-    console.log(data)
+      return $fetch(`/v2/username/${formData.username}`, {
+        params: {
+          include: include.join(','),
+          tone: formData.tone,
+        },
+      })
+    },
+  })
+
+  const onSubmit = async (data: Form) => {
+    mutate(data)
   }
 
   return (
@@ -51,9 +72,9 @@ export default function GraphGenerator() {
                   />
                 </div>
                 <div>
-                  <button className="size-[46px] inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-none focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none" type="submit">
-                    <IoSearch size={24} />
-                  </button>
+                  <Button className="size-[46px] inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-none focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none" type="submit" isLoading={isPending}>
+                    <LuImagePlus size={24} />
+                  </Button>
                 </div>
               </div>
             </form>
@@ -74,18 +95,24 @@ export default function GraphGenerator() {
           </div>
           {errors.username && <p className="text-red-500 mt-1">Github Username is required</p>}
 
-          <div className="mt-10 sm:mt-20 flex gap-8 justify-center items-center">
+          <div className="mt-3 flex gap-8 justify-center items-center">
             <GraphColorSelector control={control} />
           </div>
           {errors.tone && <p className="text-red-500 mt-1">Tone is required</p>}
 
-          <div className="mt-5">
+          <div className="mt-3">
             <label className="text-foreground-500 mb-1">Include additional contents</label>
             <div className="flex gap-8 justify-center items-center">
               <AppCheckBox name="includeDaysOnGithubText" control={control}>Days on Github Text</AppCheckBox>
               <AppCheckBox name="includeName" control={control}>Name</AppCheckBox>
               <AppCheckBox name="includeAvatar" control={control}>Avatar</AppCheckBox>
             </div>
+          </div>
+
+          <div className="flex justify-center mt-3">
+            {isPending && !isError && <Spinner className="my-28" size="lg" label="Loading..." />}
+            {isError && <p className="text-red-500 mt-1">Failed to generate the graph</p>}
+            {imageBlob && <Image src={URL.createObjectURL(imageBlob)} alt="" />}
           </div>
         </div>
       </div>

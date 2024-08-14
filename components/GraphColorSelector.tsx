@@ -13,11 +13,11 @@ export default function GraphColorSelector({
       name="tone"
       control={control}
       rules={{ required: true }}
+      defaultValue="green"
       render={({ field }) => (
         <RadioGroup
           label="Select your favorite color"
           color="default"
-          defaultValue="green"
           orientation="horizontal"
           {...field}
         >
