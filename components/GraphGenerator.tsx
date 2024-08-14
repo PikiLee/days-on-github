@@ -1,12 +1,12 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-import { $fetch } from 'ofetch'
-import { useMutation } from '@tanstack/react-query'
-import { Button, Image, Spinner } from '@nextui-org/react'
+import { Image, Tooltip } from '@nextui-org/react'
 import { LuImagePlus } from 'react-icons/lu'
+import { useState } from 'react'
 import AppCheckBox from './AppCheckBox'
 import GraphColorSelector from './GraphColorSelector'
+import AppButton from './AppButton'
 import type { Tone } from '~/utils/colors'
 
 interface Form {
@@ -19,27 +19,21 @@ interface Form {
 
 export default function GraphGenerator() {
   const { register, handleSubmit, control, formState: { errors } } = useForm<Form>()
-  const { isPending, data: imageBlob, isError, mutate } = useMutation({
-    mutationFn: (formData: Form) => {
-      const include = []
-      if (formData.includeDaysOnGithubText)
-        include.push('daysOnGithubText')
-      if (formData.includeName)
-        include.push('name')
-      if (formData.includeAvatar)
-        include.push('avatar')
-
-      return $fetch(`/v2/username/${formData.username}`, {
-        params: {
-          include: include.join(','),
-          tone: formData.tone,
-        },
-      })
-    },
-  })
+  const [imageURL, setImageURL] = useState<string>(new URL(`/v2/username/PikiLee`, window.location.origin).toString())
 
   const onSubmit = async (data: Form) => {
-    mutate(data)
+    const url = new URL(`/v2/username/${data.username}`, window.location.origin)
+    const include = []
+    if (data.includeDaysOnGithubText)
+      include.push('daysOnGithubText')
+    if (data.includeName)
+      include.push('name')
+    if (data.includeAvatar)
+      include.push('avatar')
+    url.searchParams.set('include', include.join(','))
+    url.searchParams.set('tone', data.tone)
+
+    setImageURL(url.toString())
   }
 
   return (
@@ -71,10 +65,10 @@ export default function GraphGenerator() {
                     })}
                   />
                 </div>
-                <div>
-                  <Button className="size-[46px] inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-none focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none" type="submit" isLoading={isPending}>
-                    <LuImagePlus size={24} />
-                  </Button>
+                <div className="flex gap-2">
+                  <Tooltip content="Generate">
+                    <AppButton type="submit"><LuImagePlus size={24} /></AppButton>
+                  </Tooltip>
                 </div>
               </div>
             </form>
@@ -110,9 +104,7 @@ export default function GraphGenerator() {
           </div>
 
           <div className="flex justify-center mt-3">
-            {isPending && !isError && <Spinner className="my-28" size="lg" label="Loading..." />}
-            {isError && <p className="text-red-500 mt-1">Failed to generate the graph</p>}
-            {imageBlob && <Image src={URL.createObjectURL(imageBlob)} alt="" />}
+            <Image src={imageURL} alt="" />
           </div>
         </div>
       </div>
