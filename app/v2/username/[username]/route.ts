@@ -110,9 +110,9 @@ export async function GET(request: NextRequest, { params }: { params: { username
       .png({ compressionLevel: 9 })
       .toBuffer()
     const uploadedFileDetails = await uploadFile(
-        `${username}/${filename}`,
-        compressedImage,
-        contentType,
+      `${username}/${filename}`,
+      compressedImage,
+      contentType,
     )
     logger.debug('uploadedFileDetails', uploadedFileDetails)
     return Response.redirect(uploadedFileDetails.url)
