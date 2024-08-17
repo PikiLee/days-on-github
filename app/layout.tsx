@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 import AppHeader from '~/components/AppHeader'
 import AppFooter from '~/components/AppFooter'
+import { Toaster } from '~/components/ui/toaster'
 
 const font = Nunito({
   subsets: ['latin'],
@@ -25,6 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <AppHeader />
           <main>{children}</main>
           <AppFooter />
+          <Toaster />
         </NextUIProvider>
       </body>
     </html>
