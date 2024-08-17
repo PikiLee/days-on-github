@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
 import { mockGithubData } from '../utils/mockData'
+import { tailwindColors } from '../utils/colors'
 import Graph, { includeOptions } from './Graph'
-import { tailwindColors } from '~/utils/colors'
 
 const daysOnGithubText = `Spent ${mockGithubData.daysOnGithub} (${mockGithubData.percentageDaysOnGithub}%) days on Github in last 365 days.`
 
