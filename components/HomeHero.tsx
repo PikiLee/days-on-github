@@ -9,11 +9,11 @@ export default function HomeHero() {
       <div className="grid md:grid-cols-2 gap-8 xl:gap-20 md:items-center">
         <div className="max-md:self-end">
           <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight">
-            Create your Github contributions graph with
+            Generate your Github contributions graph with
             {' '}
             <span className="text-green-600">Days on Github</span>
           </h1>
-          <p className="mt-3 text-lg text-gray-800 dark:text-neutral-400">Hand-picked colors and expertly crafted graph, designed for any kind of developers.</p>
+          <p className="mt-3 text-lg text-gray-800 dark:text-neutral-400">Hand-picked colors and expertly crafted graph, designed for developers.</p>
 
           <div className="mt-7 grid gap-3 w-full sm:inline-flex">
             <a className="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-green-700 focus:outline-none focus:bg-green-700 disabled:opacity-50 disabled:pointer-events-none" href="#">

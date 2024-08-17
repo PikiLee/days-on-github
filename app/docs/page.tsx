@@ -1,11 +1,13 @@
-'use client'
+import type { Metadata } from 'next'
+import APIDoc from '~/components/APIDoc'
 
-import README from '~/README.md'
+export const metadata: Metadata = {
+  title: 'API Docs',
+  description: 'Embed your Github contribution graph anywhere using our free and easy-to-use API endpoint.',
+}
 
 export default function Page() {
   return (
-    <div className="prose prose-neutral lg:prose-xl container mx-auto py-10 md:py-20 px-5">
-      <README />
-    </div>
+    <APIDoc />
   )
 }
