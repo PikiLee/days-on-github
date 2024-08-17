@@ -1,5 +1,7 @@
 # Days on github
 
+[homepage](https://happy.apiki.me)
+
 An API endpoint that provides an image of a GitHub contribution graph in various colors.
 
 The graph is developed using React, converted to HTML, then transformed into an image, served using Next.js. The images are cached in Vercel blob store for one day. The initial request may be slow, but subsequent requests will be quicker.
