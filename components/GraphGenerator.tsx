@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form'
 import { Image, Tooltip } from '@nextui-org/react'
 import { LuImagePlus } from 'react-icons/lu'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AppCheckBox from './AppCheckBox'
 import GraphColorSelector from './GraphColorSelector'
 import AppButton from './AppButton'
@@ -19,7 +19,7 @@ interface Form {
 
 export default function GraphGenerator() {
   const { register, handleSubmit, control, formState: { errors } } = useForm<Form>()
-  const [imageURL, setImageURL] = useState<string>(new URL(`/v2/username/PikiLee`, window.location.origin).toString())
+  const [imageURL, setImageURL] = useState<string>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const onSubmit = async (data: Form) => {
@@ -38,6 +38,11 @@ export default function GraphGenerator() {
 
     setImageURL(url.toString())
   }
+
+  useEffect(() => {
+    const url = new URL(`/v2/username/PikiLee`, window.location.origin)
+    setImageURL(url.toString())
+  }, [])
 
   return (
     <div className="relative overflow-hidden">
