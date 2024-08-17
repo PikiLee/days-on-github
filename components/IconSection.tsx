@@ -5,7 +5,6 @@ export default function IconSection() {
   return (
 
     <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-
       <div className="grid md:grid-cols-4 gap-6 lg:gap-12">
         <div className="flex gap-x-5 sm:gap-x-8">
           <IoColorPaletteOutline size={32} className="shrink-0 mt-2 text-gray-800 dark:text-white" />

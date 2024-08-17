@@ -9,7 +9,7 @@ export default function HomeHero() {
       <div className="grid md:grid-cols-2 gap-8 xl:gap-20 md:items-center">
         <div className="max-md:self-end">
           <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight">
-            Get your Github contributions graph with
+            Create your Github contributions graph with
             {' '}
             <span className="text-green-600">Days on Github</span>
           </h1>
