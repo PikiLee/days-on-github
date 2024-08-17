@@ -16,7 +16,7 @@ export default function AppHeader() {
     isActive: pathname === '/',
   }, {
     href: '/docs',
-    label: 'Documentation',
+    label: 'API Docs',
     isActive: pathname === '/docs',
   }]
 
