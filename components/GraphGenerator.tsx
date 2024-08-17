@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form'
 import { Image, Tooltip } from '@nextui-org/react'
 import { LuImagePlus } from 'react-icons/lu'
 import { useEffect, useState } from 'react'
+import { IoCopyOutline } from 'react-icons/io5'
 import AppCheckBox from './AppCheckBox'
 import GraphColorSelector from './GraphColorSelector'
 import AppButton from './AppButton'
+import { toast } from './ui/use-toast'
 import type { Tone } from '~/utils/colors'
 
 interface Form {
@@ -39,10 +41,12 @@ export default function GraphGenerator() {
     setImageURL(url.toString())
   }
 
-  useEffect(() => {
-    const url = new URL(`/v2/username/PikiLee`, window.location.origin)
-    setImageURL(url.toString())
-  }, [])
+  function copyURL() {
+    navigator.clipboard.writeText(imageURL)
+    toast({
+      title: 'The URL has been copied to your clipboard.',
+    })
+  }
 
   return (
     <div className="relative overflow-hidden">
@@ -77,6 +81,11 @@ export default function GraphGenerator() {
                   <Tooltip content="Generate">
                     <AppButton type="submit" isLoading={isLoading}><LuImagePlus size={24} /></AppButton>
                   </Tooltip>
+                  {imageURL && (
+                    <Tooltip content="Copy URL">
+                      <AppButton type="button" onClick={copyURL}><IoCopyOutline size={24} /></AppButton>
+                    </Tooltip>
+                  )}
                 </div>
               </div>
             </form>
