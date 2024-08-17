@@ -1,8 +1,26 @@
 /** @type {import('tailwindcss').Config} */
+
+import { nextui } from '@nextui-org/react'
+
 module.exports = {
-  content: ['./{graph,app}/**/*.{js,jsx,ts,tsx}'],
-  theme: {
-    extend: {},
+  content: {
+    relative: true,
+    files: ['./{app,components,utils}/**/*.{js,jsx,ts,tsx}', './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'],
   },
-  plugins: [],
+  darkMode: 'class',
+  plugins: [
+    require('@tailwindcss/typography'),
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              foreground: '#FFFFFF',
+              DEFAULT: '#12A150',
+            },
+          },
+        },
+      },
+    }),
+  ],
 }
