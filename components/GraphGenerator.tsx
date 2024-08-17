@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form'
 import { Image, Tooltip } from '@nextui-org/react'
 import { LuImagePlus } from 'react-icons/lu'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { IoCopyOutline } from 'react-icons/io5'
 import AppCheckBox from './AppCheckBox'
 import GraphColorSelector from './GraphColorSelector'
