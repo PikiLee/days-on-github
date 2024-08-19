@@ -24,8 +24,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@sparticuz/chromium-min':
-        specifier: '126'
-        version: 126.0.0
+        specifier: 127.0.0
+        version: 127.0.0
       '@types/mdx':
         specifier: ^2.0.13
         version: 2.0.13
@@ -2111,8 +2111,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@sparticuz/chromium-min@126.0.0':
-    resolution: {integrity: sha512-Wn51LRKXHwBEfm6OWnZmcMVkzWg1TQvSMsG0H5p6UFrOcM6GUjGLxty9Er863EuJC2gwIEc6kNr8h/mhT893oA==}
+  '@sparticuz/chromium-min@127.0.0':
+    resolution: {integrity: sha512-WaEcpgdAaqkEfL0zhEq0aoFJ0F+oCRn9tWemOdQjB/7qT3YrqH+7pNAT4tUaO0T0A4nexJbfLUAZx8MnhAteVg==}
     engines: {node: '>= 16'}
 
   '@stylistic/eslint-plugin-js@2.6.2':
@@ -8175,7 +8175,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.18.1':
     optional: true
 
-  '@sparticuz/chromium-min@126.0.0':
+  '@sparticuz/chromium-min@127.0.0':
     dependencies:
       follow-redirects: 1.15.6
       tar-fs: 3.0.6
