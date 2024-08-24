@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@9.7.1",
   "engines": {
-    "node": ">=20.16.0"
+    "node": ">=20.17.0"
   },
   "scripts": {
     "dev": "run-p build:graph:watch dev:next",
@@ -55,7 +55,7 @@
     "@tailwindcss/typography": "^0.5.14",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
-    "@types/node": "^20.14.15",
+    "@types/node": "^20.16.1",
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
